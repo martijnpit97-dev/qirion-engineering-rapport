@@ -2234,6 +2234,40 @@
   </div>
 </section>
 
+</div><!-- /tab-loopbaanpaden -->
+
+<div id="tts-bar" class="tts-bar collapsed" role="region" aria-label="Voorleesfunctie">
+  <button class="tts-main" id="tts-toggle" aria-label="Voorleesfunctie openen" title="Voorlezen">&#128266;</button>
+  <div class="tts-expand">
+    <button id="tts-prev" aria-label="Vorige zin" title="Vorige zin (&larr;)">&#9198;</button>
+    <button id="tts-playpause" aria-label="Afspelen of pauzeren" title="Afspelen of pauzeren (spatie)">&#9654;</button>
+    <button id="tts-next" aria-label="Volgende zin" title="Volgende zin (&rarr;)">&#9197;</button>
+    <button id="tts-stop" aria-label="Stoppen" title="Stoppen">&#9632;</button>
+    <select id="tts-section" aria-label="Spring naar sectie"></select>
+    <div class="tts-speed-group" role="group" aria-label="Snelheid">
+      <button data-speed="0.9" type="button">0,9&times;</button>
+      <button data-speed="1" type="button" class="active">1&times;</button>
+      <button data-speed="1.2" type="button">1,2&times;</button>
+      <button data-speed="1.5" type="button">1,5&times;</button>
+    </div>
+    <button id="tts-settings-btn" aria-label="Instellingen" title="Instellingen">&#9881;</button>
+    <span class="tts-status" id="tts-status">Klaar</span>
+    <button id="tts-close" aria-label="Voorleesfunctie sluiten" title="Sluiten">&times;</button>
+  </div>
+</div>
+<div id="tts-popover" class="tts-popover" hidden>
+  <button class="close" id="tts-popover-close" aria-label="Sluit instellingen" type="button">&times;</button>
+  <label>
+    <strong>Stem</strong>
+    <select id="tts-voice"></select>
+  </label>
+  <label style="display:flex;align-items:center;gap:0.5rem;">
+    <input type="checkbox" id="tts-highlight-on" checked>
+    <span>Actieve zin markeren tijdens voorlezen</span>
+  </label>
+  <p class="hint">Stemkwaliteit verschilt per browser en besturingssysteem. Microsoft Edge op Windows geeft meestal de beste Nederlandse stem. Referenties en bronnenlijsten worden automatisch overgeslagen.</p>
+</div>
+
 <script>
 (function() {
   // ===== TAB SWITCHING =====
