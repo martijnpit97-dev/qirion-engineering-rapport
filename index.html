@@ -1,0 +1,2956 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI &amp; de Toekomst van Engineering — Onderzoeksrapport 2026</title>
+
+<!-- Google Fonts: Inter (body) + Barlow Condensed (display) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --green-900: #7a1418;
+    --green-800: #b01c21;
+    --green-700: #e52329;
+    --green-500: #525ddc;
+    --green-400: #7b83ff;
+    --gray-900: #1a1a1a;
+    --gray-800: #444444;
+    --gray-700: #717171;
+    --gray-600: #b0b0b0;
+    --gray-500: #dedede;
+    --gray-400: #f0f0f0;
+    --gray-300: #f8f8f8;
+    --white: #ffffff;
+    --red: #c53030;
+    --amber: #b07d00;
+  }
+
+  @page { size: A4; margin: 1.5cm; }
+  @media print {
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .no-break { page-break-inside: avoid; }
+    .hero-section { min-height: 300px !important; }
+    .toc-bar { display: none; }
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--gray-900);
+    background: var(--white);
+    font-size: 16px;
+  }
+
+  /* ===== HERO ===== */
+  .hero-section {
+    position: relative;
+    min-height: 560px;
+    background: linear-gradient(140deg, var(--green-900) 0%, var(--green-800) 50%, #d42025 100%);
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('https://www.alliander.com/content/uploads/dotcom/Het-energiesysteem-van-de-toekomst-1020x1020.jpg') center center / cover no-repeat;
+    opacity: 0.14;
+    mix-blend-mode: luminosity;
+  }
+  .hero-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 240px;
+    background: linear-gradient(to top, rgba(122,20,24,0.97), transparent);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 3rem 4rem;
+    max-width: 900px;
+  }
+  .hero-logo {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 800;
+    font-size: 1.6rem;
+    color: var(--white);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    display: block;
+  }
+  .hero-logo img {
+    height: 36px;
+    filter: brightness(0) invert(1);
+    display: block;
+  }
+  .hero-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--white);
+    opacity: 0.85;
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 2px solid rgba(255,255,255,0.3);
+    display: inline-block;
+  }
+
+  /* ===== INLINE BRONVERMELDING ===== */
+  .ref {
+    font-size: 0.72rem;
+    color: var(--gray-700);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .section-dark .ref { color: rgba(255,255,255,0.5); }
+  .summary-section .ref { color: rgba(255,255,255,0.55); }
+  .hero-title {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 800;
+    font-size: 3.4rem;
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+  .hero-subtitle {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.75);
+    font-weight: 400;
+    max-width: 580px;
+    line-height: 1.6;
+  }
+
+  /* ===== LAYOUT ===== */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+  }
+
+  /* ===== NAVIGATION ===== */
+  .toc-bar {
+    background: var(--gray-300);
+    border-bottom: 1px solid var(--gray-500);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .toc-bar .container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem 1.2rem;
+    align-items: center;
+  }
+  .toc-bar a {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--green-700);
+    text-decoration: none;
+    white-space: nowrap;
+    padding: 2px 0;
+  }
+  .toc-bar a:hover { color: var(--green-900); text-decoration: underline; }
+
+  /* ===== SAMENVATTING ===== */
+  .summary-section {
+    background: #3a1518;
+    color: var(--white);
+    padding: 3rem 0;
+  }
+  .summary-section h2 {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 800;
+    font-size: 1.7rem;
+    color: var(--white);
+    margin-bottom: 1rem;
+    border: none;
+    padding: 0;
+    opacity: 0.95;
+  }
+  .summary-section p { margin-bottom: 0.8rem; }
+  .summary-section ul { padding-left: 1.4rem; margin-top: 0.8rem; }
+  .summary-section li { margin: 0.5rem 0; line-height: 1.6; }
+  .summary-section strong { color: var(--white); }
+
+  /* ===== SECTIONS ===== */
+  .section { padding: 3.5rem 0; }
+  .section-alt { background: var(--gray-300); }
+  .section-dark {
+    background: #2d1215;
+    color: var(--white);
+  }
+  .section-dark h2 { color: var(--white); border-bottom-color: rgba(255,255,255,0.3); }
+  .section-dark h3 { color: rgba(255,255,255,0.9); }
+  .section-dark p { color: rgba(255,255,255,0.88); }
+  .section-dark li { color: rgba(255,255,255,0.88); }
+  .section-dark strong { color: var(--white); }
+  .section-dark .callout-insight { background: rgba(255,255,255,0.08); border-left-color: var(--green-500); color: var(--white); }
+  .section-dark .callout-warning { background: rgba(255,220,100,0.12); border-left-color: #f0c030; color: rgba(255,255,255,0.9); }
+  .section-dark .callout-opportunity { background: rgba(168,236,88,0.1); border-left-color: var(--green-500); color: rgba(255,255,255,0.9); }
+  .section-dark table th { background: rgba(255,255,255,0.12); color: var(--white); }
+  .section-dark table td { border-bottom-color: rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); }
+  .section-dark table tr:nth-child(even) { background: rgba(255,255,255,0.04); }
+
+  h2 {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 800;
+    font-size: 1.8rem;
+    color: var(--green-800);
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid var(--green-500);
+  }
+  h3 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--green-700);
+    margin-top: 2rem;
+    margin-bottom: 0.6rem;
+  }
+  h4 {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--green-800);
+    margin-bottom: 0.3rem;
+  }
+  p { margin-bottom: 0.85rem; }
+  ul, ol { margin: 0.4rem 0 0.9rem 0; padding-left: 1.4rem; }
+  li { margin: 0.3rem 0; line-height: 1.65; }
+
+  /* ===== STAT CARDS ===== */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin: 1.8rem 0;
+  }
+  .stat-row-3 { grid-template-columns: repeat(3, 1fr); }
+  .stat-card {
+    background: var(--white);
+    border: 1px solid var(--gray-500);
+    border-top: 4px solid var(--green-700);
+    border-radius: 0 0 8px 8px;
+    padding: 1.2rem 1rem 1rem;
+    text-align: center;
+  }
+  .stat-card .number {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 800;
+    font-size: 2.6rem;
+    color: var(--green-700);
+    line-height: 1;
+  }
+  .stat-card .label {
+    font-size: 0.76rem;
+    color: var(--gray-800);
+    margin-top: 0.5rem;
+    line-height: 1.4;
+  }
+  .section-dark .stat-card {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(255,255,255,0.12);
+    border-top-color: var(--green-500);
+  }
+  .section-dark .stat-card .number { color: var(--white); }
+  .section-dark .stat-card .label { color: rgba(255,255,255,0.7); }
+  .section-alt .stat-card { background: var(--white); }
+
+  /* ===== CALLOUTS ===== */
+  .callout {
+    padding: 1rem 1.3rem;
+    margin: 1.2rem 0;
+    border-radius: 0 8px 8px 0;
+    border-left: 4px solid;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  .callout strong { display: block; margin-bottom: 0.25rem; font-size: 0.88rem; }
+  .callout-insight { background: #edf7f1; border-left-color: var(--green-700); }
+  .callout-insight strong { color: var(--green-800); }
+  .callout-warning { background: #fef8ec; border-left-color: #d4a017; }
+  .callout-warning strong { color: var(--amber); }
+  .callout-risk { background: #fdf2f2; border-left-color: var(--red); }
+  .callout-risk strong { color: var(--red); }
+  .callout-opportunity { background: #edf9e8; border-left-color: #52b840; }
+  .callout-opportunity strong { color: var(--green-500); }
+  .callout-critical {
+    background: var(--red);
+    color: var(--white);
+    padding: 1.2rem 1.5rem;
+    border-radius: 8px;
+    border-left: none;
+    margin: 1.4rem 0;
+    font-size: 0.92rem;
+  }
+  .callout-critical strong { color: #ffc8c8; display: inline; }
+
+  /* ===== TABLES ===== */
+  table { width: 100%; border-collapse: collapse; font-size: 0.87rem; margin: 1rem 0; }
+  th {
+    background: var(--green-800);
+    color: var(--white);
+    padding: 0.65rem 0.9rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.3px;
+  }
+  td { padding: 0.55rem 0.9rem; border-bottom: 1px solid var(--gray-500); vertical-align: top; }
+  tr:nth-child(even) { background: var(--gray-300); }
+
+  /* ===== TAGS ===== */
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 9999px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+  .tag-urgent { background: #fce4ec; color: #c53030; }
+  .tag-soon { background: #fef3cd; color: #856404; }
+  .tag-later { background: #d4edda; color: #155724; }
+  .tag-system { background: #e3f2fd; color: #1565c0; }
+
+  /* ===== VISUAL DIVIDERS (vervanging voor afbeeldingen) ===== */
+  .visual-divider {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, #2d1215 0%, #3a1518 50%, #4a1a1e 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .visual-divider::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 50%, rgba(168,236,88,0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 30%, rgba(168,236,88,0.06) 0%, transparent 45%);
+  }
+  .visual-divider .divider-quote {
+    position: relative;
+    z-index: 2;
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: rgba(255,255,255,0.9);
+    text-align: center;
+    padding: 0 2rem;
+    max-width: 700px;
+    line-height: 1.3;
+  }
+  .visual-divider .divider-quote em {
+    color: var(--green-400);
+    font-style: normal;
+  }
+  .visual-divider-sm {
+    height: 80px;
+    background: var(--green-700);
+  }
+
+  /* ===== SYSTEM CARDS ===== */
+  .system-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin: 1.5rem 0;
+  }
+  .system-card {
+    background: var(--white);
+    border: 1px solid var(--gray-500);
+    border-top: 4px solid var(--green-700);
+    border-radius: 0 0 8px 8px;
+    padding: 1.4rem;
+  }
+  .system-card h4 {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: var(--green-800);
+    margin-bottom: 0.2rem;
+  }
+  .system-card .system-role {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--gray-700);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.8rem;
+  }
+  .system-card ul { font-size: 0.88rem; margin-bottom: 0; }
+  .system-card li { margin: 0.25rem 0; }
+  .system-highlight { border-top-color: #00a651; }
+
+  /* ===== INTEGRATION BOX ===== */
+  .integration-box {
+    background: var(--green-900);
+    color: var(--white);
+    border-radius: 8px;
+    padding: 1.5rem 1.8rem;
+    margin: 1.5rem 0;
+  }
+  .integration-box h4 {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--green-400);
+    margin-bottom: 0.6rem;
+  }
+  .integration-box p { font-size: 0.9rem; color: rgba(255,255,255,0.85); margin-bottom: 0.5rem; }
+
+  /* ===== PROMPT BLOCK ===== */
+  .prompt-block {
+    background: #1e1e1e;
+    color: #d4d4d4;
+    padding: 1.3rem 1.5rem;
+    border-radius: 8px;
+    font-family: 'Cascadia Code', 'Consolas', 'Courier New', monospace;
+    font-size: 0.82rem;
+    line-height: 1.7;
+    margin: 1.2rem 0;
+    white-space: pre-wrap;
+  }
+  .prompt-block .pr { color: #a8ec58; }
+  .prompt-block .pc { color: #4ec9b0; }
+  .prompt-block .pd { color: #dcdcaa; }
+  .prompt-block .pf { color: #ce9178; }
+
+  /* ===== WEEK PLAN ===== */
+  .week-plan {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .week-block {
+    background: var(--white);
+    border: 1px solid var(--gray-500);
+    border-top: 4px solid var(--green-700);
+    border-radius: 0 0 8px 8px;
+    padding: 1.3rem;
+  }
+  .week-block h4 {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--green-800);
+    margin-bottom: 0.3rem;
+  }
+  .week-block .time {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--green-500);
+    background: var(--green-800);
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 9999px;
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.3px;
+  }
+  .week-block ul { font-size: 0.87rem; }
+
+  /* ===== DO / DONT ===== */
+  .do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.2rem 0; }
+  .do-box, .dont-box { padding: 1.2rem; border-radius: 8px; font-size: 0.9rem; }
+  .do-box { background: #edf9e8; border: 1px solid #b7e1b7; }
+  .do-box strong { color: var(--green-500); display: block; margin-bottom: 0.5rem; font-size: 0.88rem; }
+  .dont-box { background: #fdf2f2; border: 1px solid #f5c6c6; }
+  .dont-box strong { color: var(--red); display: block; margin-bottom: 0.5rem; font-size: 0.88rem; }
+  .do-box li, .dont-box li { color: var(--gray-800); }
+  .do-box p, .dont-box p { color: var(--gray-800); }
+
+  /* ===== BLOCKQUOTE ===== */
+  blockquote {
+    border-left: 4px solid var(--green-500);
+    margin: 1.2rem 0;
+    padding: 0.9rem 1.3rem;
+    background: var(--gray-300);
+    font-style: italic;
+    color: var(--gray-800);
+    font-size: 0.95rem;
+    border-radius: 0 6px 6px 0;
+  }
+  blockquote cite { display: block; font-size: 0.8rem; margin-top: 0.4rem; font-style: normal; color: var(--gray-700); }
+
+  /* ===== TIMELINE ===== */
+  .timeline { margin: 1.5rem 0; }
+  .timeline-item {
+    display: flex;
+    gap: 1.2rem;
+    margin-bottom: 1.5rem;
+    align-items: flex-start;
+  }
+  .timeline-year {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    color: var(--green-700);
+    min-width: 90px;
+    padding-top: 0.1rem;
+  }
+  .timeline-content { flex: 1; }
+  .timeline-content h4 { margin-top: 0; color: var(--green-800); }
+
+  /* ===== SOURCES ===== */
+  .sources-list {
+    font-size: 0.72rem;
+    color: var(--gray-700);
+    column-count: 2;
+    column-gap: 2rem;
+    line-height: 1.7;
+  }
+  .sources-list a { color: var(--green-700); text-decoration: none; word-break: break-all; }
+  .sources-list a:hover { text-decoration: underline; }
+
+  /* ===== FOOTER ===== */
+  .footer-section {
+    background: var(--green-900);
+    color: rgba(255,255,255,0.55);
+    padding: 2.5rem 0;
+    font-size: 0.78rem;
+    text-align: center;
+  }
+  .footer-logo {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.8rem;
+  }
+  .footer-logo img { height: 22px; filter: brightness(0) invert(0.6); display: block; margin: 0 auto 0.8rem; }
+
+  /* ===== TAB-BAR (TWEE TABS) ===== */
+  .tab-bar {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    background: var(--green-900);
+    border-bottom: 3px solid var(--green-500);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  }
+  .tab-bar-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .tab-button {
+    background: transparent;
+    border: none;
+    color: rgba(255,255,255,0.55);
+    text-align: left;
+    padding: 1.1rem 1.6rem;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.2s;
+    border-bottom: 4px solid transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+  .tab-button .tab-num {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--green-500);
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+  .tab-button .tab-title {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 800;
+    font-size: 1.35rem;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.1;
+    letter-spacing: 0.3px;
+  }
+  .tab-button .tab-sub {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.5);
+    font-weight: 500;
+    margin-top: 0.15rem;
+  }
+  .tab-button:hover { background: rgba(255,255,255,0.05); }
+  .tab-button:hover .tab-title { color: var(--white); }
+  .tab-button.active {
+    background: var(--green-700);
+    border-bottom-color: var(--green-500);
+  }
+  .tab-button.active .tab-num { opacity: 1; }
+  .tab-button.active .tab-title { color: var(--white); }
+  .tab-button.active .tab-sub { color: rgba(255,255,255,0.85); }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+  .tab-hint {
+    position: absolute;
+    right: 1.2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--green-500);
+    color: var(--green-900);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    pointer-events: none;
+    animation: pulse-hint 2s ease-in-out infinite;
+  }
+  @keyframes pulse-hint {
+    0%, 100% { transform: translateY(-50%) scale(1); }
+    50% { transform: translateY(-50%) scale(1.06); }
+  }
+  .tab-button.active .tab-hint { display: none; }
+  .toc-bar { top: 0; }
+
+  /* ===== VERDIEPING: HERO ===== */
+  .v-intro {
+    background: linear-gradient(140deg, var(--green-800) 0%, var(--green-700) 100%);
+    color: var(--white);
+    padding: 3rem 0 3.5rem;
+  }
+  .v-intro .container { max-width: 900px; }
+  .v-intro .v-label {
+    font-size: 0.72rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--green-500);
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+  }
+  .v-intro h1 {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 800;
+    font-size: 2.8rem;
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+  .v-intro .v-lead {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.88);
+    max-width: 720px;
+    line-height: 1.65;
+    margin-bottom: 1.4rem;
+  }
+  .v-intro .v-cta {
+    display: inline-block;
+    background: var(--green-500);
+    color: var(--green-900);
+    padding: 0.7rem 1.4rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.3px;
+  }
+  .v-intro .v-cta:hover { background: var(--green-400); }
+
+  /* ===== VERDIEPING: 3-KOLOM KRACHTENVELD ===== */
+  .three-col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .three-col .col {
+    background: var(--white);
+    border: 1px solid var(--gray-500);
+    border-top: 4px solid var(--green-700);
+    border-radius: 0 0 8px 8px;
+    padding: 1.3rem;
+  }
+  .three-col .col h4 {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--green-800);
+    margin-bottom: 0.6rem;
+  }
+  .three-col .col ul { font-size: 0.86rem; padding-left: 1.2rem; margin: 0; }
+  .three-col .col li { margin: 0.4rem 0; }
+  .three-col .col-verdwijnt { border-top-color: #e07000; }
+  .three-col .col-verdwijnt h4 { color: #e07000; }
+  .three-col .col-ontstaat { border-top-color: var(--green-500); }
+  .three-col .col-blijft { border-top-color: var(--green-700); }
+
+  /* ===== VERDIEPING: FUNDAMENT 5 KAARTEN ===== */
+  .fundament-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.8rem;
+    margin: 1.5rem 0;
+  }
+  .fundament-card {
+    background: var(--white);
+    border: 1px solid var(--gray-500);
+    border-top: 4px solid var(--green-700);
+    border-radius: 0 0 8px 8px;
+    padding: 1.1rem 0.9rem;
+    text-align: center;
+  }
+  .fundament-card .num {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 800;
+    font-size: 1.6rem;
+    color: var(--green-700);
+    line-height: 1;
+  }
+  .fundament-card h5 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--green-800);
+    margin: 0.5rem 0 0.4rem;
+  }
+  .fundament-card p {
+    font-size: 0.76rem;
+    color: var(--gray-800);
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  /* ===== VERDIEPING: VERGELIJKINGSTABEL PADEN ===== */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.7rem;
+    margin: 1.5rem 0 2rem;
+  }
+  .compare-card {
+    background: var(--white);
+    border: 1px solid var(--gray-500);
+    border-top: 5px solid var(--green-700);
+    border-radius: 0 0 8px 8px;
+    padding: 1rem 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .compare-card.aanvullend { border-top-color: var(--green-500); border-top-style: dashed; }
+  .compare-card .pad-num {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--green-700);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .compare-card.aanvullend .pad-num { color: var(--green-500); }
+  .compare-card h5 {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    color: var(--green-800);
+    line-height: 1.15;
+  }
+  .compare-card .kern {
+    font-size: 0.74rem;
+    color: var(--gray-800);
+    line-height: 1.4;
+    flex: 1;
+  }
+  .compare-card .meta {
+    font-size: 0.7rem;
+    border-top: 1px solid var(--gray-500);
+    padding-top: 0.5rem;
+    color: var(--gray-700);
+    line-height: 1.5;
+  }
+  .compare-card .meta strong { color: var(--green-800); display: block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.3px; }
+  .compare-card .pad-link {
+    background: var(--green-700);
+    color: var(--white);
+    text-decoration: none;
+    padding: 0.45rem 0.7rem;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 0.4rem;
+  }
+  .compare-card .pad-link:hover { background: var(--green-800); }
+
+  /* ===== VERDIEPING: ACCORDION-CARDS PADEN ===== */
+  .pad-accordion { margin: 1.2rem 0; }
+  .pad-item {
+    background: var(--white);
+    border: 1px solid var(--gray-500);
+    border-left: 5px solid var(--green-700);
+    border-radius: 6px;
+    margin-bottom: 0.8rem;
+    overflow: hidden;
+  }
+  .pad-item.aanvullend { border-left-color: var(--green-500); border-left-style: dashed; }
+  .pad-header {
+    width: 100%;
+    background: var(--white);
+    border: none;
+    padding: 1.1rem 1.4rem;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: inherit;
+    transition: background 0.15s;
+  }
+  .pad-header:hover { background: var(--gray-300); }
+  .pad-header .pad-numlabel {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: var(--green-700);
+    background: var(--gray-300);
+    padding: 0.25rem 0.7rem;
+    border-radius: 6px;
+    min-width: 56px;
+    text-align: center;
+    line-height: 1;
+  }
+  .pad-item.aanvullend .pad-header .pad-numlabel { background: #e8eaff; color: var(--green-500); }
+  .pad-header .pad-titles { flex: 1; }
+  .pad-header .pad-name {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: var(--green-800);
+    line-height: 1.1;
+  }
+  .pad-header .pad-tagline {
+    font-size: 0.82rem;
+    color: var(--gray-800);
+    margin-top: 0.2rem;
+    line-height: 1.4;
+  }
+  .pad-header .pad-toggle {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: var(--green-700);
+    width: 32px;
+    text-align: center;
+    transition: transform 0.2s;
+  }
+  .pad-item.open .pad-header .pad-toggle { transform: rotate(45deg); }
+  .pad-body {
+    display: none;
+    padding: 0.4rem 1.4rem 1.6rem 1.4rem;
+    border-top: 1px solid var(--gray-500);
+    background: var(--gray-300);
+  }
+  .pad-item.open .pad-body { display: block; }
+  .pad-body h5 {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: var(--green-800);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 1.1rem 0 0.4rem;
+  }
+  .pad-body h5:first-child { margin-top: 0.6rem; }
+  .pad-body p, .pad-body ul { font-size: 0.88rem; }
+  .pad-body ul { padding-left: 1.4rem; }
+  .pad-body .leerpad-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.6rem;
+    margin: 0.5rem 0;
+  }
+  .pad-body .leerblok {
+    background: var(--white);
+    border: 1px solid var(--gray-500);
+    border-top: 3px solid var(--green-500);
+    border-radius: 0 0 6px 6px;
+    padding: 0.7rem 0.8rem;
+  }
+  .pad-body .leerblok .periode {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    color: var(--green-700);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.3rem;
+  }
+  .pad-body .leerblok p { font-size: 0.78rem; line-height: 1.45; margin: 0; color: var(--gray-800); }
+  .pad-body .case-block {
+    background: #edf7f1;
+    border-left: 4px solid var(--green-700);
+    padding: 0.9rem 1.1rem;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.85rem;
+    color: var(--gray-900);
+    margin: 0.4rem 0;
+  }
+  .pad-body .case-block strong { color: var(--green-800); }
+  .pad-controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.6rem;
+    margin: 0.5rem 0 1rem;
+  }
+  .pad-control-btn {
+    background: var(--green-700);
+    color: var(--white);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .pad-control-btn:hover { background: var(--green-800); }
+  .pad-control-btn.secondary { background: var(--white); color: var(--green-700); border: 1px solid var(--green-700); }
+  .pad-control-btn.secondary:hover { background: var(--gray-300); }
+
+  /* ===== VERDIEPING: ZELFASSESSMENT WIDGET ===== */
+  .assessment-widget {
+    background: var(--white);
+    border: 2px solid var(--green-700);
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 1.5rem 0;
+    box-shadow: 0 4px 20px rgba(0,97,49,0.08);
+  }
+  .assessment-widget .a-intro {
+    font-size: 0.92rem;
+    color: var(--gray-800);
+    margin-bottom: 1.5rem;
+  }
+  .assessment-widget .a-disclaimer {
+    font-size: 0.75rem;
+    color: var(--gray-700);
+    font-style: italic;
+    margin-bottom: 1.5rem;
+  }
+  .assessment-question {
+    background: var(--gray-300);
+    border-left: 4px solid var(--green-500);
+    padding: 1rem 1.2rem;
+    border-radius: 0 6px 6px 0;
+    margin-bottom: 0.9rem;
+  }
+  .assessment-question .qnum {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 700;
+    font-size: 0.7rem;
+    color: var(--green-700);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.3rem;
+  }
+  .assessment-question .qtext {
+    font-size: 0.92rem;
+    color: var(--gray-900);
+    margin-bottom: 0.7rem;
+    line-height: 1.5;
+  }
+  .assessment-scale {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.4rem;
+  }
+  .assessment-scale label {
+    background: var(--white);
+    border: 1px solid var(--gray-500);
+    border-radius: 6px;
+    padding: 0.5rem 0.3rem;
+    text-align: center;
+    cursor: pointer;
+    font-size: 0.72rem;
+    color: var(--gray-800);
+    transition: all 0.15s;
+    line-height: 1.2;
+  }
+  .assessment-scale label:hover { border-color: var(--green-700); background: #edf7f1; }
+  .assessment-scale input[type="radio"] { display: none; }
+  .assessment-scale input[type="radio"]:checked + span {
+    display: block;
+  }
+  .assessment-scale label.selected {
+    background: var(--green-700);
+    border-color: var(--green-700);
+    color: var(--white);
+    font-weight: 600;
+  }
+  .assessment-submit {
+    background: var(--green-700);
+    color: var(--white);
+    border: none;
+    padding: 0.9rem 1.8rem;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    width: 100%;
+  }
+  .assessment-submit:hover { background: var(--green-800); }
+  .assessment-submit:disabled { background: var(--gray-600); cursor: not-allowed; }
+  .assessment-result {
+    display: none;
+    background: linear-gradient(135deg, var(--green-800), var(--green-700));
+    color: var(--white);
+    padding: 2rem;
+    border-radius: 12px;
+    margin-top: 1.5rem;
+  }
+  .assessment-result.show { display: block; }
+  .assessment-result h4 {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    color: var(--green-500);
+    margin-bottom: 0.6rem;
+  }
+  .assessment-result .result-pad {
+    background: rgba(255,255,255,0.1);
+    border-left: 4px solid var(--green-500);
+    padding: 1rem 1.2rem;
+    margin: 0.8rem 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .assessment-result .result-pad .rank {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 800;
+    font-size: 0.8rem;
+    color: var(--green-500);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .assessment-result .result-pad .name {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: var(--white);
+    margin: 0.2rem 0;
+  }
+  .assessment-result .result-pad .score {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.85);
+  }
+  .assessment-result .result-pad a {
+    display: inline-block;
+    margin-top: 0.6rem;
+    background: var(--green-500);
+    color: var(--green-900);
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+  .assessment-result .reset-btn {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.5);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.78rem;
+    cursor: pointer;
+    margin-top: 1rem;
+  }
+  .assessment-result .reset-btn:hover { background: rgba(255,255,255,0.12); }
+
+  /* ===== VERDIEPING: DATE-CALLOUT ===== */
+  .date-callout {
+    background: #2d1215;
+    color: var(--white);
+    padding: 1.4rem 1.6rem;
+    border-radius: 8px;
+    border-left: 5px solid var(--green-700);
+    margin: 1.2rem 0;
+  }
+  .date-callout strong { color: var(--white); display: block; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.4rem; opacity: 0.85; }
+  .date-callout .dates { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.6rem; }
+  .date-callout .date-item { background: rgba(0,0,0,0.2); padding: 0.8rem 1rem; border-radius: 6px; }
+  .date-callout .date-item .when { font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--green-700); }
+  .date-callout .date-item .what { font-size: 0.82rem; color: rgba(255,255,255,0.88); margin-top: 0.2rem; }
+
+  /* ===== T-PROFIEL combinaties ===== */
+  .tprofiel-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+    margin: 1rem 0;
+  }
+  .tprofiel-card {
+    background: var(--white);
+    border: 1px solid var(--gray-500);
+    border-left: 4px solid var(--green-700);
+    border-radius: 0 6px 6px 0;
+    padding: 0.9rem 1.1rem;
+  }
+  .tprofiel-card .combo {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: var(--green-800);
+    margin-bottom: 0.3rem;
+  }
+  .tprofiel-card .desc { font-size: 0.82rem; color: var(--gray-800); line-height: 1.5; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .hero-title { font-size: 2.4rem; }
+    .hero-content { padding: 2rem 1.5rem; }
+    .container { padding: 0 1.5rem; }
+    .stat-row, .stat-row-3 { grid-template-columns: 1fr 1fr; }
+    .week-plan { grid-template-columns: 1fr; }
+    .do-dont { grid-template-columns: 1fr; }
+    .system-grid { grid-template-columns: 1fr; }
+    .sources-list { column-count: 1; }
+    .toc-bar { display: none; }
+    .tab-bar-inner { grid-template-columns: 1fr; }
+    .tab-button { padding: 0.9rem 1.2rem; }
+    .tab-button .tab-title { font-size: 1.1rem; }
+    .tab-hint { display: none !important; }
+    .v-intro h1 { font-size: 2rem; }
+    .three-col, .fundament-grid, .compare-grid { grid-template-columns: 1fr; }
+    .pad-body .leerpad-grid { grid-template-columns: 1fr 1fr; }
+    .tprofiel-grid { grid-template-columns: 1fr; }
+    .date-callout .dates { grid-template-columns: 1fr; }
+    .assessment-scale { grid-template-columns: 1fr 1fr; }
+    .assessment-widget { padding: 1.2rem; }
+  }
+
+  /* ===== VOORLEESFUNCTIE (TTS) ===== */
+  .tts-bar {
+    position: fixed;
+    bottom: 1.2rem;
+    right: 1.2rem;
+    background: var(--green-800);
+    color: var(--white);
+    border-radius: 999px;
+    padding: 0.45rem 0.55rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.28);
+    z-index: 200;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82rem;
+    max-width: calc(100vw - 2rem);
+  }
+  .tts-bar.collapsed .tts-expand { display: none; }
+  .tts-bar .tts-expand { display: flex; align-items: center; gap: 0.4rem; }
+  .tts-bar button {
+    background: transparent;
+    color: var(--white);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 999px;
+    padding: 0.35rem 0.7rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.78rem;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .tts-bar button:hover { background: rgba(255,255,255,0.14); }
+  .tts-bar button.active {
+    background: var(--green-500);
+    color: var(--green-900);
+    border-color: var(--green-500);
+    font-weight: 700;
+  }
+  .tts-bar .tts-main {
+    background: var(--green-500);
+    color: var(--green-900);
+    border-color: var(--green-500);
+    width: 2.4rem;
+    height: 2.4rem;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+  .tts-bar .tts-main:hover { background: #c2f57a; }
+  .tts-bar select {
+    background: rgba(255,255,255,0.08);
+    color: var(--white);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 999px;
+    padding: 0.32rem 0.7rem;
+    font-family: inherit;
+    font-size: 0.76rem;
+    max-width: 180px;
+  }
+  .tts-bar select option { background: var(--green-800); color: var(--white); }
+  .tts-bar .tts-status {
+    opacity: 0.85;
+    font-size: 0.72rem;
+    white-space: nowrap;
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .tts-bar .tts-speed-group { display: flex; gap: 0.25rem; }
+  .tts-bar .tts-speed-group button { padding: 0.3rem 0.55rem; font-size: 0.72rem; }
+  .tts-popover {
+    position: fixed;
+    bottom: 4.8rem;
+    right: 1.2rem;
+    background: var(--white);
+    color: var(--gray-900);
+    border: 1px solid var(--green-700);
+    border-radius: 10px;
+    padding: 1.1rem 1.2rem 1rem;
+    box-shadow: 0 14px 34px rgba(0,0,0,0.22);
+    min-width: 280px;
+    max-width: calc(100vw - 2rem);
+    z-index: 201;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82rem;
+  }
+  .tts-popover .close {
+    float: right;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--gray-700);
+    font-size: 1.05rem;
+    padding: 0;
+    line-height: 1;
+  }
+  .tts-popover label { display: block; margin-bottom: 0.8rem; color: var(--gray-900); }
+  .tts-popover label strong {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--green-700);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.3rem;
+    font-weight: 700;
+  }
+  .tts-popover select {
+    width: 100%;
+    padding: 0.45rem 0.55rem;
+    border: 1px solid var(--gray-500);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.82rem;
+    background: var(--white);
+  }
+  .tts-popover .hint {
+    font-size: 0.72rem;
+    color: var(--gray-700);
+    font-style: italic;
+    margin-top: 0.4rem;
+    line-height: 1.45;
+  }
+  /* Highlight van actieve zin tijdens voorlezen.
+     Alliander oranje, subtiel maar herkenbaar op elke achtergrond
+     (inclusief de lichtgroene callouts), verdwijnt zodra voorlezen stopt. */
+  ::highlight(tts-active) {
+    background-color: rgba(255, 120, 0, 0.38);
+    color: inherit;
+  }
+  .tts-active-fallback {
+    background-color: rgba(255, 120, 0, 0.38);
+    border-radius: 3px;
+    padding: 0.05em 0.1em;
+  }
+  @media (max-width: 820px) {
+    .tts-bar .tts-speed-group { display: none; }
+    .tts-bar .tts-status { display: none; }
+    .tts-bar select { max-width: 120px; }
+  }
+  @media (max-width: 520px) {
+    .tts-bar { bottom: 0.6rem; right: 0.6rem; }
+    .tts-bar select { display: none; }
+  }
+  @media print {
+    .tts-bar, .tts-popover { display: none !important; }
+    ::highlight(tts-active) { background-color: transparent; }
+  }
+</style>
+</head>
+<body>
+<body>
+
+<!-- ===== HERO ===== -->
+<div class="hero-section">
+  <div class="hero-content">
+    <span class="hero-logo">ENGINEERING</span>
+    <div class="hero-label">Onderzoeksrapport &mdash; Engineering &mdash; Martijn Pit</div>
+    <h1 class="hero-title">AI &amp; de Toekomst van<br>Engineering</h1>
+    <p class="hero-subtitle">Kritisch, genuanceerd en actiegericht. Hoe AI de engineering van energie-infrastructuur transformeert: van ontwerp en automatisering tot digitale tweelingen en nieuwe competenties. April 2026.</p>
+  </div>
+</div>
+
+<!-- ===== TAB-BAR ===== -->
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <button class="tab-button active" data-tab="hoofdonderzoek" type="button">
+      <span class="tab-num">01 &mdash; Hoofdonderzoek</span>
+      <span class="tab-title">AI &amp; de Toekomst van Engineering</span>
+      <span class="tab-sub">Trends, systemen, rol &amp; strategie</span>
+    </button>
+    <button class="tab-button" data-tab="loopbaanpaden" type="button" style="position:relative;">
+      <span class="tab-num">02 &mdash; Verdieping</span>
+      <span class="tab-title">Skill-hub: de engineer van morgen</span>
+      <span class="tab-sub">Skills, ontwikkelroutes, zelfassessment</span>
+      <span class="tab-hint">Nieuw &mdash; klik hier</span>
+    </button>
+  </div>
+</div>
+
+<!-- ===== TAB 01: HOOFDONDERZOEK ===== -->
+<div id="tab-hoofdonderzoek" class="tab-content active">
+
+<!-- ===== TOC ===== -->
+<div class="toc-bar">
+  <div class="container">
+    <a href="#deel1">1. Context</a>
+    <a href="#deel2">2. Krachtenveld</a>
+    <a href="#deel3">3. Systeemscan</a>
+    <a href="#deel4">4. Impact op de rol</a>
+    <a href="#deel5">5. Casestudies</a>
+    <a href="#deel6">6. 90-dagenplan</a>
+    <a href="#bronnen">Bronnen</a>
+  </div>
+</div>
+
+<!-- ===== SAMENVATTING ===== -->
+<div class="summary-section">
+  <div class="container">
+    <h2>Samenvatting voor drukke mensen</h2>
+    <p>De engineering-functiegroep staat niet voor vervanging door AI, maar voor een fundamentele verschuiving in hoe het werk wordt gedaan. Het populaire narratief dat AI engineers overbodig maakt is onjuist. De eerlijke versie: <strong>AI dwingt een transformatie af van puur technisch ontwerper naar AI-geletterde, data-bewuste integrator.</strong> De domeinexpertise wordt schaars en daarmee waardevoller. Wie niet beweegt, wordt niet vervangen maar ingehaald.</p>
+    <ul>
+      <li>Europa heeft tot 2050 <strong>&euro;21,4 biljoen aan grid-investeringen</strong> nodig; in Nederland groeien de wachtlijsten voor netaansluitingen en is engineeringscapaciteit de bottleneck <span class="ref">(Eurelectric, 2025)</span></li>
+      <li>Digital twins voor verdeelstations zijn geen toekomstmuziek meer: Siemens, ABB en Schneider lanceren in 2025-2026 <strong>AI-gedreven platforms</strong> die ontwerp en validatie fundamenteel veranderen <span class="ref">(Siemens / ABB / Schneider, 2025-2026)</span></li>
+      <li>AI-gebaseerde foutdetectie kan storingsduur met <strong>30 tot 50% verkorten</strong> en extra transmissiecapaciteit ontsluiten op bestaande lijnen <span class="ref">(IEA, 2025)</span></li>
+      <li>De Nederlandse energiesector kampt met een <strong>ervaringskloof</strong>: meer dan 60% van het engineering-personeel heeft minder dan 10 jaar ervaring. AI kan deze kloof helpen overbruggen <span class="ref">(IEEE Spectrum, 2025)</span></li>
+      <li>De EU AI Act maakt energie-infrastructuur potentieel <strong>hoog risico</strong>; FRIA-plicht vanaf augustus 2026. De Nederlandse toezichthouders bereiden handhaving voor <span class="ref">(EU AI Act, Annex III)</span></li>
+      <li>Het moeilijkste is niet de technologie maar de <strong>adoptie</strong>: bij vergelijkbare kenniswerkers lag de AI-adoptiegraad na &eacute;&eacute;n jaar op slechts 60% <span class="ref">(MIT Sloan, 2025)</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===== DEEL 1: CONTEXT ===== -->
+<div class="section" id="deel1">
+  <div class="container">
+    <h2>1. Het speelveld: waar staat de engineer in 2026?</h2>
+
+    <p>De energietransitie in Nederland legt een ongekende druk op het elektriciteitsnet. Netbeheerders en hun uitvoeringspartners staan voor de grootste investeringsagenda sinds de jaren zestig. Het Nationaal Plan Energiesysteem, de Regionale Energiestrategie&euml;n en de groeiende vraag vanuit datacenters, warmtepompen en elektrisch vervoer dwingen een versnelling af in netuitbreidingen, stationsbouw en kabelaanleg. De organisatie staat als life cycle service provider voor netbeheerders middenin deze druk: ontwerp, bouw en onderhoud van midden- en hoogspanningsinfrastructuur. Op Europees niveau schat Eurelectric dat de sector haar asset-deployment moet verdubbelen in een krappe arbeidsmarkt. <span class="ref">(Eurelectric, 2025)</span></p>
+
+    <div class="stat-row">
+      <div class="stat-card"><div class="number">&euro;21,4 bln</div><div class="label">noodzakelijke grid-investering in Europa tot 2050 <span class="ref">(Eurelectric, 2025)</span></div></div>
+      <div class="stat-card"><div class="number">30-50%</div><div class="label">kortere storingsduur mogelijk door AI-foutdetectie <span class="ref">(IEA, 2025)</span></div></div>
+      <div class="stat-card"><div class="number">60%+</div><div class="label">van engineering-personeel in de sector heeft &lt;10 jaar ervaring <span class="ref">(IEEE, 2025)</span></div></div>
+      <div class="stat-card"><div class="number">40%</div><div class="label">van leidinggevenden in de energiesector heeft moeite met werving <span class="ref">(IEEE, 2025)</span></div></div>
+    </div>
+
+    <h3>Twee disciplines, &eacute;&eacute;n druk</h3>
+    <p>De engineering-functiegroep kent twee hoofddisciplines die elk op een andere manier worden geraakt door AI:</p>
+
+    <div class="system-grid" style="grid-template-columns: 1fr 1fr;">
+      <div class="system-card system-highlight">
+        <h4>Primair engineering</h4>
+        <div class="system-role">Het krachtige deel</div>
+        <ul>
+          <li>Ontwerp van fysieke elektrische installaties: schakelaars, transformatoren, busbars, kabelverbindingen</li>
+          <li>Werkt aan hoogspanningstransportnetten 50 kV &ndash; 150 kV</li>
+          <li>Output: montagebestekken, begrotingen, engineeringspakketten</li>
+          <li>Seniority: junior/medior (5+ jaar) tot senior (7+ jaar)</li>
+        </ul>
+      </div>
+      <div class="system-card system-highlight">
+        <h4>Secundair engineering</h4>
+        <div class="system-role">Het slimme deel</div>
+        <ul>
+          <li>Ontwerp van besturing, signalering en beveiliging (relaisbeveiliging, SCADA, meten &amp; beveiligen)</li>
+          <li>Werkt volgens systems engineering-methodiek</li>
+          <li>Tooling: ELCAD, kennis van IEC 61850 en IEC-normen</li>
+          <li>Seniority: senior (10+ jaar), HBO/WO</li>
+        </ul>
+      </div>
+    </div>
+
+    <p>Beide disciplines delen dezelfde kernactiviteiten: projectmatig werken in multidisciplinaire teams, co&ouml;rdinatie tussen disciplines, uitbestedingsbeheer (offertes beoordelen, gunnen, bewaken) en kwaliteitscontrole op collega's. En beide worden geraakt door dezelfde macrotrend: AI verandert niet w&aacute;t engineers ontwerpen, maar h&oacute;&eacute; ze het doen.</p>
+
+    <div class="callout callout-risk">
+      <strong>De ervaringskloof als versneller</strong>
+      Meer dan 60% van het engineering-personeel in de energiesector heeft minder dan 10 jaar ervaring <span class="ref">(IEEE Spectrum, 2025)</span>. Dit is paradoxaal: de sector heeft ongekend veel ervaring nodig (complexere projecten, strakkere regelgeving), terwijl het ervaringsniveau daalt. AI kan hier een multiplicator zijn: het versnelt de kennistoegang voor minder ervaren engineers. Uit onderzoek bij softwareontwikkelaars bleek dat minder ervaren professionals 26% meer taken voltooiden met AI-ondersteuning <span class="ref">(MIT Sloan / SSRN, 2025)</span>.
+    </div>
+
+    <h3>Wat horen we niet in het AI-verhaal?</h3>
+    <p>De meeste bronnen over AI in engineering zijn afkomstig van partijen met commercieel belang: Siemens, ABB, Schneider, Hitachi Energy. Een eerlijk beeld vereist ook de nuance:</p>
+    <ul>
+      <li>Er zijn <strong>geen gepubliceerde case studies</strong> specifiek over generatieve AI en hoogspanningsengineers. De belofte is gebaseerd op extrapolatie uit aangrenzende domeinen</li>
+      <li>Adoptie verloopt traag: bij vergelijkbare kenniswerkers was de adoptiegraad na &eacute;&eacute;n jaar slechts ~60% <span class="ref">(MIT Sloan, 2025)</span></li>
+      <li>1 op de 50 AI-investeringen levert transformatieve waarde; de rest levert incrementeel, niets, of schept nieuwe problemen <span class="ref">(KPMG, 2025)</span></li>
+      <li>AI-ondersteuning kan ook werkdruk verh&oacute;gen: uit onderzoek bij 200 medewerkers rapporteerde 83% h&oacute;gere werkdruk na AI-invoering en 62% burnout <span class="ref">(Berkeley Haas / HBR, 2026)</span></li>
+    </ul>
+
+    <div class="callout callout-insight">
+      <strong>Implicatie voor de engineering-organisatie</strong>
+      AI is geen wondermiddel voor de capaciteitscrisis. Het versnelt repetitief werk en verbetert kennistoegang, maar vraagt om actieve sturing, scholing en verandermanagement. Zonder die investering blijft adoptie laag en risico op werkdrukverhoging re&euml;el.
+    </div>
+  </div>
+</div>
+
+<!-- ===== DIVIDER ===== -->
+<div class="visual-divider">
+  <div class="divider-quote">"The engineers who can design AI-native grid systems <em>do not exist yet.</em>"<br><span style="font-size:0.9rem; opacity:0.7; font-weight:600;">Energy Education 2026 Report</span></div>
+</div>
+
+<!-- ===== DEEL 2: KRACHTENVELD ===== -->
+<div class="section section-alt" id="deel2">
+  <div class="container">
+    <h2>2. Het krachtenveld: wat verdwijnt, ontstaat en blijft</h2>
+    <p>Voordat de technologie in detail wordt behandeld, eerst het grotere beeld: wat verschuift er in het dagelijks werk van de engineer?</p>
+
+    <div class="three-col">
+      <div class="col col-verdwijnt">
+        <h4>Verdwijnt</h4>
+        <ul>
+          <li>Handmatige 2D-tekeningen en specificatiewerk</li>
+          <li>Repetitieve materiaallijsten en standaardbeschrijvingen</li>
+          <li>Lineair projectverloop (waterval)</li>
+          <li>Reactief onderhoud als ontwerpuitgangspunt</li>
+          <li>Ge&iuml;soleerd werken per discipline zonder data-uitwisseling</li>
+        </ul>
+      </div>
+      <div class="col col-ontstaat">
+        <h4>Ontstaat</h4>
+        <ul>
+          <li>AI-geletterde engineer die werkt m&eacute;t modellen</li>
+          <li>Digital twin-specialist voor virtuele validatie</li>
+          <li>Design for monitorability: sensorplaatsing als ontwerpparameter</li>
+          <li>Cybersecurity-bewustzijn in het ontwerp</li>
+          <li>Cross-disciplinaire integrator (IT/OT/data)</li>
+        </ul>
+      </div>
+      <div class="col col-blijft">
+        <h4>Blijft</h4>
+        <ul>
+          <li>Domeinexpertise hoogspanning, normen en veiligheid</li>
+          <li>Engineeringsjudgement bij complexe ontwerpkeuzes</li>
+          <li>Vertaling PvE &rarr; technisch ontwerp</li>
+          <li>Kwaliteitsreview van collega's</li>
+          <li>Veldkennis: hoe ontwerp zich vertaalt naar montage</li>
+          <li>Projectco&ouml;rdinatie en disciplineafstemming</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout callout-insight">
+      <strong>De twee-snelheden-hypothese</strong>
+      De energiesector digitaliseert niet uniform. Een deel van de engineers zal snel transformeren naar AI-ondersteund werken (met name jongere engineers en secundair engineers die al digitaler werken). Een ander deel blijft het ambacht uitvoeren op de manier die werkt. Beide groepen zijn nodig. Het risico zit niet in de snelheid van de voorlopers, maar in het achterblijven van de middengroep die noch ambachtelijk excelleert noch digitaal bijschoolt.
+    </div>
+  </div>
+</div>
+
+<!-- ===== DEEL 3: SYSTEEMSCAN ===== -->
+<div class="section" id="deel3">
+  <div class="container">
+    <h2>3. Het technologielandschap: AI-tools voor de engineer</h2>
+    <p>De organisatie en haar opdrachtgevers werken met een ecosysteem van tools dat elk een eigen AI-laag krijgt. Hieronder de belangrijkste platformen en wat AI erin verandert voor het dagelijks engineeringswerk.</p>
+
+    <div class="system-grid">
+      <div class="system-card system-highlight">
+        <h4>Digital Twins</h4>
+        <div class="system-role">Virtuele validatie en ontwerp</div>
+        <ul>
+          <li>Siemens Digital Twin Composer (medio 2026)</li>
+          <li>ABB Ability Smart Grid platform</li>
+          <li>Schneider One Digital Grid Platform (2025)</li>
+          <li>Markt groeit van $8,9 naar $17,3 mld tot 2035</li>
+        </ul>
+      </div>
+      <div class="system-card system-highlight">
+        <h4>IEC 61850 tooling</h4>
+        <div class="system-role">Substation-automatisering</div>
+        <ul>
+          <li>Hitachi Energy PCM600 &amp; IET600 (Ed. 2.1)</li>
+          <li>AI-edge-analytics op IED-niveau</li>
+          <li>Glasvezel-procesbus vervangt koper</li>
+          <li>Object-ge&ouml;rienteerde protocolbenadering</li>
+        </ul>
+      </div>
+      <div class="system-card">
+        <h4>Predictive maintenance</h4>
+        <div class="system-role">Van reactief naar voorspellend</div>
+        <ul>
+          <li>Realtime sensordata: temperatuur, trillingen, belasting</li>
+          <li>Tot 30% minder downtime, 40% lagere kosten</li>
+          <li>NextEra: 70-75% minder storingen</li>
+          <li>Ontwerp be&iuml;nvloedt monitorability downstream</li>
+        </ul>
+      </div>
+      <div class="system-card">
+        <h4>Generatieve AI</h4>
+        <div class="system-role">Kenniswerk versnellen</div>
+        <ul>
+          <li>Specificaties en normenonderzoek versnellen</li>
+          <li>Offerte-analyse en rapportage automatiseren</li>
+          <li>Kennisdeling en onboarding verbeteren</li>
+          <li>Adoptiegraad bij kenniswerkers: ~60% na 1 jaar</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>3.1 Digital twins: ontwerpen valideren v&oacute;&oacute;r je bouwt</h3>
+    <p>Een digital twin is een virtueel replica van een fysieke asset, zoals een verdeelstation, kabelverbinding of transformator, dat in real-time wordt gevoed met operationele data. Voor engineers verschuift dit het werk fundamenteel: in plaats van een ontwerp op papier op te leveren en te hopen dat het in de praktijk werkt, kun je het ontwerp virtueel testen, optimaliseren en falen laten zien v&oacute;&oacute;r de eerste schop de grond ingaat.</p>
+
+    <p><strong>Siemens en NVIDIA</strong> kondigden begin 2026 een partnerschap aan voor volledig AI-gedreven, adaptieve omgevingen. De Digital Twin Composer (beschikbaar medio 2026) maakt het mogelijk om virtuele modellen van substations te bouwen en te testen. <span class="ref">(Siemens Press, CES 2026)</span></p>
+
+    <p><strong>ABB&rsquo;s Ability Smart Grid</strong> platform gebruikt AI-gestuurde analytics voor vraagvoorspelling, foutdetectie en co&ouml;rdinatie van decentrale energiebronnen. <span class="ref">(GM Insights, 2025)</span></p>
+
+    <div class="callout callout-opportunity">
+      <strong>Wat dit betekent voor de engineer</strong>
+      Digital twins veranderen de feedbackloop: fouten worden eerder zichtbaar, revisies worden goedkoper, en ontwerpen kunnen worden geoptimaliseerd op parameters die nu pas na inbedrijfstelling meetbaar zijn. De keerzijde: het vereist nieuwe competenties in datamodellering en simulatie die nu niet in het functieprofiel staan.
+    </div>
+
+    <h3>3.2 IEC 61850: de standaard wordt slimmer</h3>
+    <p>IEC 61850 blijft de hoeksteen voor communicatie in moderne substations. De recente Ed2.1-updates en IEC 61869 versterken interoperabiliteit en beveiliging. Hitachi Energy&rsquo;s PCM600 en IET600 behaalden als eerste de Ed. 2.1-certificering. <span class="ref">(Hitachi Energy, 2025)</span></p>
+
+    <p>De trend is duidelijk: glasvezel-procesbus vervangt koperen bekabeling, AI-edge-analytics draaien op IED-niveau, en de object-ge&ouml;rienteerde benadering vermindert engineering-complexiteit maar vereist nieuwe kennis van digitale protocollen en cybersecurity.</p>
+
+    <div class="callout callout-warning">
+      <strong>Cybersecurity als ontwerppameter</strong>
+      Naarmate substations digitaler worden, groeit het aanvalsoppervlak. De verschuiving van koper naar glasvezel en van lokale naar netwerkgebonden besturing maakt cybersecurity niet langer een IT-vraagstuk maar een engineering-ontwerpparameter. Engineers moeten beveiligingsprincipes meenemen in het ontwerp, niet achteraf toevoegen.
+    </div>
+
+    <h3>3.3 Predictive maintenance: ontwerpen voor monitorability</h3>
+    <p>AI-systemen combineren realtime sensordata (temperatuur, trillingen, belastingcycli, elektrische prestaties) met historische patronen om storingen te voorspellen. De resultaten zijn significant: tot 30% minder downtime en 40% lagere onderhoudskosten. <span class="ref">(Tandfonline, 2025)</span></p>
+
+    <p>Bij NextEra Energy sturen AI-algoritmen automatisch zonnepanelen en windturbinebladen bij, met als resultaat 25-30% lagere onderhoudskosten en 70-75% minder storingen. <span class="ref">(Energy Digital, 2025)</span></p>
+
+    <p>De relevantie voor engineers: ontwerpkeuzes van vandaag bepalen de mogelijkheden voor predictive maintenance morgen. Sensorplaatsing, datatoegang en monitorability worden ontwerpparameters, niet afterthoughts.</p>
+
+    <h3>3.4 Generatieve AI: het dagelijks kenniswerk versnellen</h3>
+    <p>Er zijn geen gepubliceerde case studies specifiek voor hoogspanningsengineers en generatieve AI. De meest relevante data komt uit aangrenzende domeinen:</p>
+
+    <div class="stat-row stat-row-3">
+      <div class="stat-card"><div class="number">26%</div><div class="label">meer taken voltooid door ontwikkelaars met AI-tooling <span class="ref">(MIT Sloan / SSRN, 2025)</span></div></div>
+      <div class="stat-card"><div class="number">15%</div><div class="label">productiviteitsstijging bij klantenservice met AI <span class="ref">(Brynjolfsson et al., 2023)</span></div></div>
+      <div class="stat-card"><div class="number">~60%</div><div class="label">adoptiegraad na 1 jaar bij vergelijkbare kenniswerkers <span class="ref">(MIT Sloan, 2025)</span></div></div>
+    </div>
+
+    <p>Waar generatieve AI de engineer concreet kan helpen:</p>
+    <table>
+      <tr><th>Taak</th><th>AI-potentieel</th></tr>
+      <tr><td>Specificaties en montagebestekken opstellen</td><td>Standaardbeschrijvingen automatiseren; engineer focust op afwijkingen en uitzonderingen</td></tr>
+      <tr><td>Normenonderzoek (IEC, NEN)</td><td>Snel relevante normen en clausules ophalen en samenvatten</td></tr>
+      <tr><td>Offerte-analyse</td><td>Vergelijking van offertes op prijs, specificaties en afwijkingen</td></tr>
+      <tr><td>Rapportage en documentatie</td><td>Eerste concepten genereren op basis van projectdata</td></tr>
+      <tr><td>Kennisdeling en onboarding</td><td>Interne kennisbank doorzoekbaar maken met AI-assistenten</td></tr>
+      <tr><td>Ontwerp en dimensionering</td><td>Ondersteuning bij standaardconfiguraties; finale verantwoordelijkheid blijft bij de engineer</td></tr>
+    </table>
+
+    <div class="callout callout-risk">
+      <strong>De grenzen van generatieve AI voor engineering</strong>
+      De kern van het engineeringswerk, namelijk ontwerp, dimensionering en veiligheidsberekeningen, vereist domeinexpertise die generatieve AI niet kan vervangen. AI kan context en referenties aanreiken, maar het engineeringsjudgement, het vermogen om in complexe, ambigue situaties de juiste ontwerpkeuze te maken, blijft mensenwerk. Wie AI inzet als vervanging in plaats van versnelling creëert veiligheidsrisico's in kritieke infrastructuur.
+    </div>
+  </div>
+</div>
+
+<!-- ===== DEEL 4: IMPACT OP ROL ===== -->
+<div class="section section-dark" id="deel4">
+  <div class="container">
+    <h2>4. Impact op de rol en competenties</h2>
+
+    <p>De engineer van 2030 doet hetzelfde werk als de engineer van 2024: energie-infrastructuur ontwerpen die veilig, betrouwbaar en betaalbaar is. Maar de manier waarop dat werk wordt uitgevoerd, verschuift fundamenteel.</p>
+
+    <h3>4.1 Wat verandert in het dagelijks werk</h3>
+    <table>
+      <tr><th>Activiteit</th><th>Nu</th><th>Over 3 tot 5 jaar</th></tr>
+      <tr><td>Specificaties opstellen</td><td>Handmatig, op basis van ervaring en templates</td><td>AI genereert eerste concept; engineer reviewt en past aan</td></tr>
+      <tr><td>Ontwerp valideren</td><td>Berekeningen, peer review, ervaring</td><td>Digital twin-simulatie v&oacute;&oacute;r bouw; berekeningen geautomatiseerd</td></tr>
+      <tr><td>Normenonderzoek</td><td>Handmatig doorzoeken van IEC, NEN, bedrijfsnormen</td><td>AI-assistent doorzoekt normen en signaleert relevante clausules</td></tr>
+      <tr><td>Offertebeoordeling</td><td>Vergelijking in Excel, handmatige analyse</td><td>AI vergelijkt offertes op prijs, spec-afwijkingen en risico&rsquo;s</td></tr>
+      <tr><td>Projectco&ouml;rdinatie</td><td>Overleggen, e-mails, statusupdates</td><td>AI-dashboards met realtime projectstatus; engineer focust op beslissingen</td></tr>
+      <tr><td>Onderhoudsstrategie</td><td>Reactief of periodiek gepland</td><td>Predictive: ontwerp bepaalt monitorability en onderhoudsintervallen</td></tr>
+    </table>
+
+    <h3>4.2 Competenties die schaars worden (en dus waardevoller)</h3>
+    <ul>
+      <li><strong>Diep domeinkennis hoogspanning</strong>: kennis van elektrische principes, materiaalgedrag, thermische grenzen en veiligheidsmarges. AI kan dit niet vervangen en het aanbod op de arbeidsmarkt krimpt <span class="ref">(IEEE Spectrum, 2025)</span></li>
+      <li><strong>Engineeringsjudgement</strong>: het vermogen om in ambigue situaties, wanneer normen niet eenduidig zijn of projecteisen conflicteren, de juiste afweging te maken</li>
+      <li><strong>Veldkennis</strong>: begrijpen hoe een ontwerp zich vertaalt naar montage, inbedrijfstelling en operatie. Dit komt alleen uit ervaring en is niet digitaliseerbaar</li>
+      <li><strong>Cross-disciplinair integratievermogen</strong>: de engineer als verbinder van primair, secundair, civiel, IT/OT en projectmanagement</li>
+    </ul>
+
+    <h3>4.3 Competenties die nieuw nodig zijn</h3>
+    <ul>
+      <li><strong>AI-geletterdheid</strong>: begrijpen wat AI-modellen wel en niet kunnen, wanneer output betrouwbaar is, en hoe je AI-tools effectief inzet. Verplicht onder EU AI Act art. 4 <span class="ref">(EU AI Act, 2025)</span></li>
+      <li><strong>Data-bewust ontwerpen</strong>: sensorplaatsing, datatoegang en interfacing als ontwerpparameters meenemen</li>
+      <li><strong>Cybersecurity-basiskennis</strong>: beveiligingsprincipes in het ontwerp meenemen nu substations digitaler worden</li>
+      <li><strong>Werken met digital twins</strong>: virtuele modellen opzetten, valideren en interpreteren als onderdeel van het ontwerpproces</li>
+      <li><strong>Systems thinking</strong>: de verschuiving van component-denken naar systeemdenken, waarbij IT, OT en data-lagen integraal worden meegenomen</li>
+    </ul>
+
+    <h3>4.4 Regelgeving als driver</h3>
+    <div class="date-callout">
+      <strong>EU AI Act &mdash; relevante data voor engineering</strong>
+      <p style="color:rgba(255,255,255,0.85);font-size:0.88rem;">Twee momenten waar engineers en hun organisatie mee moeten rekenen.</p>
+      <div class="dates">
+        <div class="date-item">
+          <div class="when">Februari 2025</div>
+          <div class="what">Artikel 4 (AI-geletterdheid) van kracht. Iedereen die met AI werkt namens de organisatie moet voldoende geletterd zijn.</div>
+        </div>
+        <div class="date-item">
+          <div class="when">Augustus 2026</div>
+          <div class="what">Hoog-risico-verplichtingen handhaafbaar. Energie-infrastructuur valt onder Annex III. FRIA verplicht voor AI-systemen in kritieke infrastructuur.</div>
+        </div>
+      </div>
+    </div>
+
+    <p>De WOR (art. 25 en 27) geeft de ondernemingsraad advies- en instemmingsrecht bij invoering van AI-tooling die werkprocessen wijzigt. Het SER-advies AI en Werk (mei 2025) benadrukt werknemersbetrokkenheid en het voorkomen van algoritmisch management. <span class="ref">(SER, 2025; WOR art. 25/27)</span></p>
+
+    <div class="callout callout-insight">
+      <strong>De paradox voor de organisatie</strong>
+      De organisatie heeft AI nodig om de capaciteitscrisis het hoofd te bieden. Tegelijkertijd valt haar werk (kritieke energie-infrastructuur) onder de strengste categorie van de EU AI Act. Dit vraagt om een doordachte aanpak: snel genoeg om relevant te blijven, zorgvuldig genoeg om compliant te zijn.
+    </div>
+  </div>
+</div>
+
+<!-- ===== DIVIDER ===== -->
+<div class="visual-divider">
+  <div class="divider-quote">"A shrinking workforce threatens the future of the grid."<br><span style="font-size:0.9rem; opacity:0.7; font-weight:600;">IEEE Spectrum, 2025</span></div>
+</div>
+
+<!-- ===== DEEL 5: CASESTUDIES ===== -->
+<div class="section" id="deel5">
+  <div class="container">
+    <h2>5. Casestudies</h2>
+
+    <p>Concrete voorbeelden van AI-inzet in vergelijkbare contexten. Waar mogelijk Nederlands of Europees; waar dat ontbreekt internationaal, met toelichting waarom het relevant is.</p>
+
+    <h3>5.1 AI for Energy Grids Lab (Nederland)</h3>
+    <p>Het AI for Energy Grids Lab is een samenwerking tussen de moederorganisatie en academische partners. Het lab ontwikkelt methoden en tools op basis van netwerkdata voor effici&euml;ntie, duurzaamheid en betrouwbaarheid van midden- en laagspanningsnetten. Data scientists, elektrotechnisch engineers en digitaliseringsteams werken hier samen. <span class="ref">(AI Hub Oost, 2025)</span></p>
+    <div class="callout callout-opportunity">
+      <strong>Relevantie</strong>
+      Dit lab zit binnen het eigen moederbedrijf. Engineers kunnen hier kennis, tools en ervaring uit betrekken. Het biedt een directe verbinding tussen academisch AI-onderzoek en de praktijk van netengineering.
+    </div>
+
+    <h3>5.2 Enexis: netautomatisering en GenAI</h3>
+    <p>Enexis, een vergelijkbare regionale netbeheerder, zet de DALI-box (IoT) in voor monitoring, besturing en meting van het energienet. Tegelijkertijd werft Enexis actief Senior GenAI Engineers om het energienet slimmer en toekomstbestendiger te maken met AI. <span class="ref">(Enexis / werkenbij, 2025)</span></p>
+    <div class="callout callout-insight">
+      <strong>Relevantie</strong>
+      Enexis laat zien dat vergelijkbare netbeheerders in Nederland AI al organisatorisch inbedden: niet als experiment maar als structurele functie. Dit signaleert dat de markt beweegt en dat achterblijven een concurrentienadeel wordt bij het werven van technisch talent.
+    </div>
+
+    <h3>5.3 NextEra Energy (VS): predictive maintenance</h3>
+    <p>NextEra Energy, de grootste producent van wind- en zonne-energie ter wereld, heeft AI-algoritmen ge&iuml;ntegreerd die automatisch zonnepanelen en windturbinebladen bijsturen. Resultaat: 25-30% lagere onderhoudskosten en 70-75% minder storingen. <span class="ref">(Energy Digital, 2025)</span></p>
+    <p><em>Let op: dit is een Amerikaanse case in opwek, niet in transport of distributie. De schaal en marktstructuur zijn anders dan in de Nederlandse gereguleerde context. De technische principes van predictive maintenance zijn wel direct toepasbaar op de assets die de organisatie beheert.</em></p>
+
+    <h3>5.4 Siemens + NVIDIA: Digital Twin Composer (2026)</h3>
+    <p>Siemens en NVIDIA hebben begin 2026 een partnerschap aangekondigd voor volledig AI-gedreven, adaptieve productie- en energieomgevingen. De Digital Twin Composer maakt het mogelijk om virtuele modellen van substations te bouwen en te testen v&oacute;&oacute;r fysieke realisatie. <span class="ref">(Siemens Press, CES 2026)</span></p>
+    <div class="callout callout-opportunity">
+      <strong>Relevantie</strong>
+      Direct toepasbaar op het ontwerp van verdeelstations. Als de organisatie digital twins adopteert, verandert de feedbackloop voor engineers: fouten worden eerder zichtbaar, revisies worden goedkoper, en ontwerpen kunnen worden geoptimaliseerd op parameters die nu pas na inbedrijfstelling meetbaar zijn.
+    </div>
+
+    <h3>5.5 Hitachi Energy: IEC 61850 Ed. 2.1 tooling</h3>
+    <p>Hitachi Energy&rsquo;s PCM600 en IET600 behaalden als eerste de IEC 61850 Ed. 2.1-certificering. Dit zet een nieuwe standaard voor veilige, interoperabele tools voor moderne digitale substations. <span class="ref">(Hitachi Energy, 2025)</span></p>
+    <p><em>Relevantie: tooling die secundair engineers direct raakt. Nieuwe certificeringen dwingen bijscholing af en verschuiven het competentieprofiel richting digitale protocollen en cybersecurity.</em></p>
+  </div>
+</div>
+
+<!-- ===== DEEL 6: 90-DAGENPLAN ===== -->
+<div class="section section-alt" id="deel6">
+  <div class="container">
+    <h2>6. 90-dagenplan: van inzicht naar actie</h2>
+
+    <p>Dit plan is gericht op de engineering-organisatie als geheel, niet op individuele engineers. Het doel: in 90 dagen de basis leggen voor een structurele AI-transformatie zonder de operatie te verstoren.</p>
+
+    <h3>Fase 1: Weken 1 tot 4 &mdash; Verkennen en inventariseren</h3>
+    <table>
+      <tr><th>Actie</th><th>Wie</th><th>Output</th></tr>
+      <tr><td>AI-geletterdheidsscan uitvoeren onder engineers (art. 4 EU AI Act)</td><td>Engineering-leiding + HR</td><td>Nulmeting digitale volwassenheid per team</td></tr>
+      <tr><td>Inventarisatie huidige tooling en AI-readiness per discipline</td><td>Engineering-leiding + IT</td><td>Tooling-matrix: wat is er, wat mist, wat is AI-ready</td></tr>
+      <tr><td>Kennismakingssessie met AI for Energy Grids Lab</td><td>Selectie engineers + lab-team</td><td>Inzicht in beschikbare tools en lopend onderzoek</td></tr>
+      <tr><td>Verkenning digital twin-pilots bij leveranciers (Siemens, ABB)</td><td>Engineering-leiding + inkoop</td><td>Shortlist pilotmogelijkheden en kostenraming</td></tr>
+    </table>
+
+    <h3>Fase 2: Weken 5 tot 8 &mdash; Experimenteren en leren</h3>
+    <table>
+      <tr><th>Actie</th><th>Wie</th><th>Output</th></tr>
+      <tr><td>Pilot: generatieve AI voor specificatiewerk bij 1 projectteam</td><td>Pilotteam (5-8 engineers)</td><td>Tijdsmetingen, kwaliteitsbeoordeling, adoptie-observaties</td></tr>
+      <tr><td>Training AI-geletterdheid (basisniveau) voor alle engineers</td><td>Engineering-breed</td><td>Alle engineers voldoen aan art. 4 minimumeis</td></tr>
+      <tr><td>OR informeren over AI-plannen en regelgevingskader</td><td>Engineering-leiding + HR</td><td>Formeel informatiemoment; draagvlak voor vervolgstappen</td></tr>
+      <tr><td>Evaluatie IEC 61850 Ed. 2.1 tooling-impact voor secundair team</td><td>Secundair engineering</td><td>Bijscholingsplan en migratietijdlijn</td></tr>
+    </table>
+
+    <h3>Fase 3: Weken 9 tot 12 &mdash; Beslissen en opschalen</h3>
+    <table>
+      <tr><th>Actie</th><th>Wie</th><th>Output</th></tr>
+      <tr><td>Evaluatie pilotresultaten en go/no-go voor opschaling</td><td>Engineering-leiding</td><td>Besluitdocument met businesscase</td></tr>
+      <tr><td>Competentieprofiel engineer 2.0 opstellen</td><td>Engineering-leiding + HR</td><td>Aangepast functieprofiel met AI-gerelateerde competenties</td></tr>
+      <tr><td>Roadmap digital twin-adoptie (6-18 maanden)</td><td>Engineering-leiding + IT + leverancier</td><td>Fasering, budget, benodigde competenties</td></tr>
+      <tr><td>FRIA-voorbereidingsplan voor augustus 2026</td><td>Engineering-leiding + compliance + HR</td><td>Impactassessment-template en verantwoordelijkheden</td></tr>
+    </table>
+
+    <div class="callout callout-warning">
+      <strong>Realiteitscheck</strong>
+      Dit plan gaat ervan uit dat er capaciteit is voor verkenning naast het dagelijkse projectwerk. Bij de huidige werkdruk in de sector is dat niet vanzelfsprekend. De engineering-leiding zal expliciet tijd moeten vrijmaken en beschermen. Zonder die bescherming wordt dit plan een intentie in plaats van een actie.
+    </div>
+  </div>
+</div>
+
+<!-- ===== BRONNEN ===== -->
+<div class="section section-alt" id="bronnen">
+  <div class="container">
+    <h2>Bronnen</h2>
+
+    <div class="sources-list">
+      <h4>Analisten en onderzoek</h4>
+      <ul>
+        <li>IEEE Spectrum &mdash; A Shrinking Workforce Threatens the Future of the Grid (2025)</li>
+        <li>The Green Recruitment Company &mdash; AI Energy Skills Gap: The Hidden Threat to Smart Grid Success (2025)</li>
+        <li>Carnegie Mellon / Heinz College &mdash; Empowering the Energy Workforce for an AI-Driven Future (2025)</li>
+        <li>MIT Sloan / SSRN &mdash; Effects of Generative AI on High-Skilled Work: Evidence from Three Field Experiments with Software Developers (2024-2025)</li>
+        <li>Brynjolfsson, Li, Raymond &mdash; Generative AI at Work, Science (2023)</li>
+        <li>Ranganathan &amp; Ye &mdash; Berkeley Haas / HBR: AI-induced unsustainable intensity (2026)</li>
+        <li>McKinsey &mdash; Generative AI and the Dutch labor market (2025)</li>
+        <li>KPMG &mdash; AI investment returns analysis (2025)</li>
+        <li>Energy Education 2026 &mdash; Building the AI-Native Workforce for a Net-Zero World</li>
+      </ul>
+    </div>
+
+    <div class="sources-list">
+      <h4>Leveranciers en technologie</h4>
+      <ul>
+        <li>Siemens Press &mdash; Digital Twin Composer, CES 2026; Siemens-NVIDIA partnership</li>
+        <li>ABB &mdash; Ability Smart Grid platform</li>
+        <li>Schneider Electric &mdash; One Digital Grid Platform (maart 2025)</li>
+        <li>Hitachi Energy &mdash; PCM600 &amp; IET600, IEC 61850 Ed. 2.1 certificering</li>
+        <li>GM Insights &mdash; Digital Substation Market Size 2026-2035</li>
+        <li>Tandfonline &mdash; Leveraging AI for predictive maintenance in energy systems (2025)</li>
+        <li>Energy Digital &mdash; Top 10 AI Applications in Energy (2025)</li>
+      </ul>
+    </div>
+
+    <div class="sources-list">
+      <h4>Nederlandse context</h4>
+      <ul>
+        <li>AI Hub Oost &mdash; AI for Energy Grids Lab (samenwerking Alliander en academische partners)</li>
+        <li>InnovationQuarter &mdash; Artificial Intelligence voor de energietransitie: 8 uitdagingen voor Nederland</li>
+        <li>Enexis &mdash; Senior GenAI Engineer vacature; SCADA Engineer Netautomatisering</li>
+        <li>React Online &mdash; De energietransitie in Nederland: digitale tools en AI onmisbaar</li>
+      </ul>
+    </div>
+
+    <div class="sources-list">
+      <h4>Regelgeving</h4>
+      <ul>
+        <li>EU AI Act &mdash; art. 4 (AI-geletterdheid), art. 26 (hoog-risico verplichtingen), Annex III (kritieke infrastructuur)</li>
+        <li>Europese Commissie &mdash; Strategic Roadmap digitalisation and AI in the energy sector (adoptie 2026)</li>
+        <li>SER &mdash; Advies AI en Werk (mei 2025)</li>
+        <li>WOR &mdash; art. 25 (adviesrecht), art. 27 (instemmingsrecht)</li>
+        <li>AVG &mdash; DPIA-verplichting bij persoonsgegevensverwerking door AI</li>
+        <li>FRIA &mdash; Fundamental Rights Impact Assessment, verplicht vanaf augustus 2026</li>
+      </ul>
+    </div>
+
+    <div class="sources-list">
+      <h4>Sectororganisaties</h4>
+      <ul>
+        <li>Eurelectric &mdash; Strategic Roadmap response digitalisation and AI in energy (2025)</li>
+        <li>Eurelectric &mdash; Presidency Manifesto 2025-2027</li>
+        <li>Eurelectric &mdash; Grid digitalisation can improve power system efficiency in Europe (2025)</li>
+        <li>EY &mdash; Utility digital transformation and the workforce (2025)</li>
+        <li>IEA &mdash; AI-based fault detection estimates (2025)</li>
+        <li>EU Sustainable Energy Week &mdash; AI and Energy: the dynamic duo shaping the power grid (2025)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</div><!-- /tab-hoofdonderzoek -->
+
+<!-- ===== TAB 02: VERDIEPING (later toe te voegen) ===== -->
+<div id="tab-loopbaanpaden" class="tab-content">
+
+<!-- ===== SKILL-HUB: INTRO ===== -->
+<section class="v-intro" style="background: linear-gradient(140deg, #7a1418 0%, #b01c21 50%, #d42025 100%); padding: 3.5rem 1.5rem;">
+  <div class="container">
+    <span class="v-label" style="color: rgba(255,255,255,0.85); border-bottom: 2px solid rgba(255,255,255,0.3);">VERDIEPING</span>
+    <h1 style="color: #fff;">Skill-hub: wat de engineer van morgen moet kunnen</h1>
+    <p class="v-lead" style="color: rgba(255,255,255,0.9);">De functietitel verandert niet. Een primair engineer blijft een primair engineer, een secundair engineer blijft een secundair engineer. Maar het werk verandert wel: de tools, de verwachtingen, de samenwerkingen en de complexiteit. Dit hoofdstuk brengt in kaart welke vaardigheden erbij komen, welke verschuiven en hoe je je daarop ontwikkelt.</p>
+    <a href="#v-werkbeweging" class="v-cta" style="background: var(--green-500); color: #fff;">Hoe het werk verandert &darr;</a>
+  </div>
+</section>
+
+<!-- ===== BEPERKINGEN ===== -->
+<section class="section-light" style="padding: 2rem 1.5rem;">
+  <div class="container" style="max-width: 900px;">
+    <h2 style="color: var(--green-800);">Beperkingen bij deze verdieping</h2>
+    <ul style="font-size: 0.88rem; color: var(--gray-800); line-height: 1.7;">
+      <li><strong>Geen primair onderzoek</strong>: er zijn geen interviews met engineers binnen de organisatie afgenomen. De skill-analyse is gebaseerd op secundaire bronnen en sectortrends.</li>
+      <li><strong>Angelsaksische bias</strong>: veel bronnen over engineering-transformatie komen uit de VS en het VK. De Nederlandse context (gereguleerde netbeheerders, CAO-structuur, medezeggenschapswetgeving) wijkt hier structureel van af.</li>
+      <li><strong>Geen functiehuis-voorstel</strong>: dit is een verkenning van skills en ontwikkelrichtingen, niet een formeel functiehuis of competentieraamwerk. De organisatie bepaalt zelf hoe zij dit vertaalt naar functieprofielen.</li>
+      <li><strong>Snelheid van het veld</strong>: AI-tooling en certificeringen ontwikkelen zich snel. Specifieke tool- en platformaanbevelingen kunnen bij publicatie achterhaald zijn.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== HET WERK IN BEWEGING ===== -->
+<section id="v-werkbeweging" class="section-dark" style="background: #2d1215; padding: 2.5rem 1.5rem;">
+  <div class="container" style="max-width: 960px;">
+    <h2 style="color: #fff;">Het werk in beweging</h2>
+    <p style="color: rgba(255,255,255,0.85); font-size: 0.92rem; line-height: 1.7; margin-bottom: 1.5rem;">Wat doet een engineer in de energie-infrastructuur over drie tot vijf jaar anders dan nu? Niet alles verandert, maar genoeg om er nu over na te denken.</p>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+
+      <!-- Primair -->
+      <div style="background: rgba(255,255,255,0.06); border-radius: 10px; padding: 1.5rem; border-top: 3px solid var(--green-700);">
+        <h4 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; color: #fff; font-size: 1.1rem; margin-bottom: 0.8rem;">Primair engineer</h4>
+
+        <div style="margin-bottom: 1rem;">
+          <h5 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--green-400); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.4rem;">Nu</h5>
+          <ul style="font-size: 0.82rem; color: rgba(255,255,255,0.8); line-height: 1.6; padding-left: 1.2rem; margin: 0;">
+            <li>Ontwerp in 2D-CAD, handmatige tekeningen en revisies</li>
+            <li>Montagebestekken en materiaallijsten grotendeels handmatig opstellen</li>
+            <li>Lineair projectverloop: ontwerp &rarr; review &rarr; bouw</li>
+            <li>Kwaliteitsreview op papier of in PDF</li>
+          </ul>
+        </div>
+
+        <div>
+          <h5 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--green-400); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.4rem;">Over 3-5 jaar</h5>
+          <ul style="font-size: 0.82rem; color: rgba(255,255,255,0.8); line-height: 1.6; padding-left: 1.2rem; margin: 0;">
+            <li>Parametrisch ontwerpen in 3D met geautomatiseerde normtoetsing</li>
+            <li>Ontwerpvalidatie via digital twins vóór fysieke bouw</li>
+            <li>Materiaallijsten en specificaties deels gegenereerd door AI-assistenten</li>
+            <li>Iteratief ontwerp met directe feedback uit simulatie</li>
+            <li>Ontwerpen met sensorplaatsing als bewuste parameter</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Secundair -->
+      <div style="background: rgba(255,255,255,0.06); border-radius: 10px; padding: 1.5rem; border-top: 3px solid var(--green-500);">
+        <h4 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; color: #fff; font-size: 1.1rem; margin-bottom: 0.8rem;">Secundair engineer</h4>
+
+        <div style="margin-bottom: 1rem;">
+          <h5 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--green-400); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.4rem;">Nu</h5>
+          <ul style="font-size: 0.82rem; color: rgba(255,255,255,0.8); line-height: 1.6; padding-left: 1.2rem; margin: 0;">
+            <li>Besturings- en beveiligingsontwerp in ELCAD</li>
+            <li>IEC 61850-configuratie met bestaande tooling</li>
+            <li>Specificaties en basisontwerpen handmatig opstellen</li>
+            <li>Reactieve storingsanalyse op basis van historische data</li>
+          </ul>
+        </div>
+
+        <div>
+          <h5 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--green-400); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.4rem;">Over 3-5 jaar</h5>
+          <ul style="font-size: 0.82rem; color: rgba(255,255,255,0.8); line-height: 1.6; padding-left: 1.2rem; margin: 0;">
+            <li>IEC 61850 Ed. 2.1 met versterkte interoperabiliteit en security</li>
+            <li>AI-edge-analytics op IED-niveau voor predictive maintenance</li>
+            <li>Glasvezel-procesbus in plaats van koperen bekabeling</li>
+            <li>Cybersecurity als standaard ontwerpparameter</li>
+            <li>Integratie met digitale tweelingen en SCADA-vernieuwing</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gedeeld -->
+    <div style="background: rgba(255,255,255,0.06); border-radius: 10px; padding: 1.5rem; margin-top: 1.5rem; border-left: 3px solid rgba(255,255,255,0.3);">
+      <h4 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; color: #fff; font-size: 1rem; margin-bottom: 0.6rem;">Wat voor beide geldt</h4>
+      <ul style="font-size: 0.85rem; color: rgba(255,255,255,0.85); line-height: 1.7; padding-left: 1.2rem; margin: 0;">
+        <li>GenAI-assistenten ondersteunen bij specificatie-opstelling, normenonderzoek, offerte-analyse en rapportage <span class="ref">(MIT Sloan/SSRN, 2024-2025)</span></li>
+        <li>Meer cross-disciplinaire coördinatie: de scheiding primair/secundair/IT/OT vervaagt</li>
+        <li>Compliance wordt onderdeel van het ontwerp, niet een toets achteraf (EU AI Act, FRIA vanaf augustus 2026) <span class="ref">(EU AI Act, 2024)</span></li>
+        <li>De engineer wordt steeds meer integrator en steeds minder tekenvakman</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MEDEZEGGENSCHAP EN REGELGEVING ===== -->
+<section class="section-light" style="padding: 2.5rem 1.5rem;">
+  <div class="container" style="max-width: 900px;">
+    <h2 style="color: var(--green-800);">Regelgeving die dit raakt</h2>
+    <p style="font-size: 0.92rem; color: var(--gray-800); line-height: 1.7; margin-bottom: 1rem;">Skill-ontwikkeling rond AI en digitalisering vindt niet in een vacuüm plaats. Meerdere wettelijke kaders bepalen hoe AI in de engineering-praktijk mag worden ingezet.</p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+      <div style="background: #fff; border-left: 4px solid var(--green-700); padding: 1.2rem; border-radius: 0 8px 8px 0;">
+        <h5 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--green-800); margin-bottom: 0.4rem;">EU AI Act</h5>
+        <p style="font-size: 0.82rem; color: var(--gray-800); line-height: 1.6;">Art. 4 verplicht AI-geletterdheid. Art. 26 regelt hoogrisico-AI. Annex III definieert energienetwerken als potentieel hoog risico. Dit maakt AI-geletterdheid een wettelijke verplichting, niet een nice-to-have. <span class="ref">(EU AI Act, 2024)</span></p>
+      </div>
+      <div style="background: #fff; border-left: 4px solid var(--green-700); padding: 1.2rem; border-radius: 0 8px 8px 0;">
+        <h5 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--green-800); margin-bottom: 0.4rem;">FRIA-verplichting</h5>
+        <p style="font-size: 0.82rem; color: var(--gray-800); line-height: 1.6;">Vanaf augustus 2026 verplicht voor AI in kritieke infrastructuur. Engineers die AI-tools specificeren of ontwerpen, moeten de FRIA-systematiek begrijpen. <span class="ref">(EU AI Act, Annex III)</span></p>
+      </div>
+      <div style="background: #fff; border-left: 4px solid var(--green-700); padding: 1.2rem; border-radius: 0 8px 8px 0;">
+        <h5 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--green-800); margin-bottom: 0.4rem;">WOR art. 25 &amp; 27</h5>
+        <p style="font-size: 0.82rem; color: var(--gray-800); line-height: 1.6;">De OR heeft adviesrecht bij invoering van technologie die werkprocessen wijzigt, en instemmingsrecht bij regelingen rond prestatiemonitoring. AI-tools in engineering vallen hier onder.</p>
+      </div>
+      <div style="background: #fff; border-left: 4px solid var(--green-700); padding: 1.2rem; border-radius: 0 8px 8px 0;">
+        <h5 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--green-800); margin-bottom: 0.4rem;">SER-advies &amp; AVG</h5>
+        <p style="font-size: 0.82rem; color: var(--gray-800); line-height: 1.6;">Het SER-advies van mei 2025 benadrukt werknemersbetrokkenheid en scholingsrecht bij AI-implementatie. De AVG vereist een DPIA bij AI-systemen die persoonsgegevens verwerken. <span class="ref">(SER, mei 2025)</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SKILL-LANDSCHAP ===== -->
+<section class="section-dark" style="background: #2d1215; padding: 2.5rem 1.5rem;">
+  <div class="container" style="max-width: 960px;">
+    <h2 style="color: #fff;">Het skill-landschap</h2>
+    <p style="color: rgba(255,255,255,0.85); font-size: 0.92rem; line-height: 1.7; margin-bottom: 1.5rem;">Skills voor de engineer van morgen vallen in drie categorieën. <strong style="color: #fff;">Kern</strong>-skills blijven onvervangbaar en worden schaarser (en dus waardevoller). <strong style="color: #fff;">Groei</strong>-skills bestaan al maar worden veel belangrijker. <strong style="color: #fff;">Nieuw</strong>-skills komen erbij en vereisen gerichte ontwikkeling.</p>
+
+    <!-- KERN -->
+    <div style="margin-bottom: 1.5rem;">
+      <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem;">
+        <div style="background: var(--green-700); color: #fff; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; padding: 0.35rem 0.8rem; border-radius: 4px;">Kern</div>
+        <span style="color: rgba(255,255,255,0.7); font-size: 0.82rem;">Onvervangbaar en schaarser wordend</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem;">
+        <div style="background: rgba(229,35,41,0.12); border: 1px solid rgba(229,35,41,0.3); border-radius: 8px; padding: 1rem;">
+          <h5 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: #fff; font-size: 0.92rem; margin-bottom: 0.3rem;">Domeinexpertise hoogspanning</h5>
+          <p style="font-size: 0.78rem; color: rgba(255,255,255,0.75); line-height: 1.5; margin: 0;">Kennis van elektrische principes, materialen, normen (IEC, NEN), veiligheidsvoorschriften. Dit is niet automatiseerbaar en wordt schaars door vergrijzing.</p>
+        </div>
+        <div style="background: rgba(229,35,41,0.12); border: 1px solid rgba(229,35,41,0.3); border-radius: 8px; padding: 1rem;">
+          <h5 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: #fff; font-size: 0.92rem; margin-bottom: 0.3rem;">Engineeringsjudgement</h5>
+          <p style="font-size: 0.78rem; color: rgba(255,255,255,0.75); line-height: 1.5; margin: 0;">Het vermogen om in complexe, ambigue situaties de juiste ontwerpkeuze te maken. AI kan opties aandragen, maar de afweging blijft mensenwerk.</p>
+        </div>
+        <div style="background: rgba(229,35,41,0.12); border: 1px solid rgba(229,35,41,0.3); border-radius: 8px; padding: 1rem;">
+          <h5 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: #fff; font-size: 0.92rem; margin-bottom: 0.3rem;">Veldkennis</h5>
+          <p style="font-size: 0.78rem; color: rgba(255,255,255,0.75); line-height: 1.5; margin: 0;">Begrijpen hoe een ontwerp zich vertaalt naar montage en operatie. Geen digital twin vervangt het besef dat een kabelgoot op 4 meter hoogte onderhouden moet worden.</p>
+        </div>
+        <div style="background: rgba(229,35,41,0.12); border: 1px solid rgba(229,35,41,0.3); border-radius: 8px; padding: 1rem;">
+          <h5 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: #fff; font-size: 0.92rem; margin-bottom: 0.3rem;">Klantvertaling</h5>
+          <p style="font-size: 0.78rem; color: rgba(255,255,255,0.75); line-height: 1.5; margin: 0;">Het vertalen van een Programma van Eisen naar een werkbaar ontwerp. Opdrachtgevers als Liander en TenneT verwachten een sparringpartner, geen uitvoerder.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- GROEI -->
+    <div style="margin-bottom: 1.5rem;">
+      <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem;">
+        <div style="background: var(--green-500); color: #fff; font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; padding: 0.35rem 0.8rem; border-radius: 4px;">Groei</div>
+        <span style="color: rgba(255,255,255,0.7); font-size: 0.82rem;">Bestaat al, wordt veel belangrijker</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem;">
+        <div style="background: rgba(82,93,220,0.12); border: 1px solid rgba(82,93,220,0.3); border-radius: 8px; padding: 1rem;">
+          <h5 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: #fff; font-size: 0.92rem; margin-bottom: 0.3rem;">Cross-disciplinair werken</h5>
+          <p style="font-size: 0.78rem; color: rgba(255,255,255,0.75); line-height: 1.5; margin: 0;">Samenwerken over de grens van primair, secundair, IT/OT en data. De scheiding tussen disciplines vervaagt naarmate systemen integraler worden.</p>
+        </div>
+        <div style="background: rgba(82,93,220,0.12); border: 1px solid rgba(82,93,220,0.3); border-radius: 8px; padding: 1rem;">
+          <h5 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: #fff; font-size: 0.92rem; margin-bottom: 0.3rem;">Digitale samenwerking</h5>
+          <p style="font-size: 0.78rem; color: rgba(255,255,255,0.75); line-height: 1.5; margin: 0;">Effectief werken in digitale omgevingen: versiebeheer, digitale review, gedeelde modellen. Niet programmeren, maar digitaal vaardig samenwerken.</p>
+        </div>
+        <div style="background: rgba(82,93,220,0.12); border: 1px solid rgba(82,93,220,0.3); border-radius: 8px; padding: 1rem;">
+          <h5 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: #fff; font-size: 0.92rem; margin-bottom: 0.3rem;">Systeemdenken</h5>
+          <p style="font-size: 0.78rem; color: rgba(255,255,255,0.75); line-height: 1.5; margin: 0;">Primair, secundair, IT/OT, data en cybersecurity als geïntegreerd geheel zien. De systems engineering-methodiek van secundair wordt relevant voor iedereen.</p>
+        </div>
+        <div style="background: rgba(82,93,220,0.12); border: 1px solid rgba(82,93,220,0.3); border-radius: 8px; padding: 1rem;">
+          <h5 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: #fff; font-size: 0.92rem; margin-bottom: 0.3rem;">Normenkennis 2.0</h5>
+          <p style="font-size: 0.78rem; color: rgba(255,255,255,0.75); line-height: 1.5; margin: 0;">IEC 61850 Ed. 2.1, IEC 62351, NIS2: normen digitaliseren en verbreden. Engineers moeten niet alleen de elektrische normen kennen maar ook de digitale. <span class="ref">(Hitachi Energy, 2025)</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- NIEUW -->
+    <div>
+      <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem;">
+        <div style="background: #fff; color: var(--green-800); font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; padding: 0.35rem 0.8rem; border-radius: 4px;">Nieuw</div>
+        <span style="color: rgba(255,255,255,0.7); font-size: 0.82rem;">Komt erbij, vereist gerichte ontwikkeling</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem;">
+        <div style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 1rem;">
+          <h5 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: #fff; font-size: 0.92rem; margin-bottom: 0.3rem;">AI-geletterdheid</h5>
+          <p style="font-size: 0.78rem; color: rgba(255,255,255,0.75); line-height: 1.5; margin: 0;">Begrijpen wat AI-modellen wel en niet kunnen. GenAI-assistenten inzetten voor specificaties, normenonderzoek en rapportage. Output kritisch beoordelen. Wettelijk verplicht via EU AI Act art. 4. <span class="ref">(EU AI Act, 2024)</span></p>
+        </div>
+        <div style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 1rem;">
+          <h5 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: #fff; font-size: 0.92rem; margin-bottom: 0.3rem;">Databewust ontwerpen</h5>
+          <p style="font-size: 0.78rem; color: rgba(255,255,255,0.75); line-height: 1.5; margin: 0;">Design for monitorability: sensorplaatsing en dataverzameling als ontwerpparameter. Weten wat je meet, waarom, en wat de kwaliteit van data bepaalt.</p>
+        </div>
+        <div style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 1rem;">
+          <h5 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: #fff; font-size: 0.92rem; margin-bottom: 0.3rem;">Digital twin-vaardigheid</h5>
+          <p style="font-size: 0.78rem; color: rgba(255,255,255,0.75); line-height: 1.5; margin: 0;">Virtuele modellen opzetten, valideren en interpreteren. Niet elke engineer wordt specialist, maar iedereen moet ermee kunnen werken zodra de tooling volwassen is. <span class="ref">(Siemens, CES 2026; GM Insights, 2025)</span></p>
+        </div>
+        <div style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 1rem;">
+          <h5 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: #fff; font-size: 0.92rem; margin-bottom: 0.3rem;">Cybersecurity-bewustzijn</h5>
+          <p style="font-size: 0.78rem; color: rgba(255,255,255,0.75); line-height: 1.5; margin: 0;">Beveiligingsprincipes meenemen in het ontwerp. Niet elke engineer wordt security-specialist, maar iedereen moet het aanvalsoppervlak van digitale substations begrijpen.</p>
+        </div>
+        <div style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 1rem;">
+          <h5 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: #fff; font-size: 0.92rem; margin-bottom: 0.3rem;">Compliance als ontwerpeis</h5>
+          <p style="font-size: 0.78rem; color: rgba(255,255,255,0.75); line-height: 1.5; margin: 0;">FRIA's, DPIA's en AI-governance begrijpen als engineer, niet alleen als jurist. Vanaf augustus 2026 wettelijk verplicht voor AI in kritieke infrastructuur. <span class="ref">(EU AI Act, Annex III)</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ONTWIKKELROUTES ===== -->
+<section class="section-light" style="padding: 2.5rem 1.5rem;">
+  <div class="container" style="max-width: 960px;">
+    <h2 style="color: var(--green-800);">Drie ontwikkelroutes</h2>
+    <p style="font-size: 0.92rem; color: var(--gray-800); line-height: 1.7; margin-bottom: 0.5rem;">Dit zijn geen nieuwe functies. Het zijn ontwikkelrichtingen die je combineert met je bestaande rol als primair of secundair engineer. De meeste engineers zullen zich in één of twee routes verdiepen, afhankelijk van hun interesse, ervaring en de behoefte binnen het team.</p>
+
+    <!-- Route 1 -->
+    <div style="border: 1px solid var(--gray-400); border-radius: 10px; margin-top: 1.5rem; overflow: hidden;">
+      <div style="background: var(--green-700); padding: 1rem 1.2rem; display: flex; align-items: center; gap: 0.8rem;">
+        <div style="background: #fff; color: var(--green-800); font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.1rem; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">1</div>
+        <div>
+          <h4 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; color: #fff; font-size: 1.15rem; margin: 0;">Verdiepen in digitale ontwerp-tools</h4>
+          <p style="font-size: 0.78rem; color: rgba(255,255,255,0.85); margin: 0.2rem 0 0;">Van 2D naar 3D, van tekenen naar simuleren</p>
+        </div>
+      </div>
+      <div style="padding: 1.2rem;">
+        <p style="font-size: 0.88rem; color: var(--gray-800); line-height: 1.7;"><strong>Voor wie:</strong> primair of secundair engineers die affiniteit hebben met modellering en visualisatie, en die gefrustreerd raken door ontwerpfouten die pas bij montage zichtbaar worden.</p>
+        <p style="font-size: 0.88rem; color: var(--gray-800); line-height: 1.7;"><strong>Wat je leert:</strong> parametrisch ontwerpen, digital twin-platformen (Siemens, ABB Ability, Schneider One Digital Grid), virtuele validatie en inbedrijfstelling, sensorintegratie in ontwerpmodellen.</p>
+        <h5 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--green-800); font-size: 0.85rem; margin-top: 1rem;">Stappen</h5>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.6rem;">
+          <div style="background: var(--gray-300); padding: 0.8rem; border-radius: 6px;">
+            <div style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--green-700); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px;">Maand 1-3</div>
+            <p style="font-size: 0.78rem; color: var(--gray-800); line-height: 1.45; margin: 0.3rem 0 0;">Oriëntatie op digital twin-concepten. Online cursussen (Siemens Xcelerator Academy, Coursera). Demo-omgevingen verkennen.</p>
+          </div>
+          <div style="background: var(--gray-300); padding: 0.8rem; border-radius: 6px;">
+            <div style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--green-700); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px;">Maand 4-6</div>
+            <p style="font-size: 0.78rem; color: var(--gray-800); line-height: 1.45; margin: 0.3rem 0 0;">Pilotproject: bestaand verdeelstation nabouwen als digital twin. Samenwerking met leverancier of data-afdeling.</p>
+          </div>
+          <div style="background: var(--gray-300); padding: 0.8rem; border-radius: 6px;">
+            <div style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--green-700); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px;">Maand 7-12</div>
+            <p style="font-size: 0.78rem; color: var(--gray-800); line-height: 1.45; margin: 0.3rem 0 0;">Parametrische workflows opzetten. Integratie met bestaande CAD. Validatiemethodieken ontwikkelen.</p>
+          </div>
+          <div style="background: var(--gray-300); padding: 0.8rem; border-radius: 6px;">
+            <div style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--green-700); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px;">Jaar 2</div>
+            <p style="font-size: 0.78rem; color: var(--gray-800); line-height: 1.45; margin: 0.3rem 0 0;">Virtuele inbedrijfstelling op nieuwbouw. Kennis delen met collega's. Platformcertificeringen.</p>
+          </div>
+        </div>
+        <div style="background: #fef5f5; border-left: 3px solid var(--green-700); padding: 0.8rem 1rem; border-radius: 0 6px 6px 0; margin-top: 1rem;">
+          <p style="font-size: 0.82rem; color: var(--gray-800); line-height: 1.6; margin: 0;"><strong>Opgelet:</strong> een digital twin is zo goed als de data die hem voedt. Zonder sensorinfrastructuur blijft het een mooi 3D-plaatje. Zorg dat je deze route combineert met databewust ontwerpen.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Route 2 -->
+    <div style="border: 1px solid var(--gray-400); border-radius: 10px; margin-top: 1.5rem; overflow: hidden;">
+      <div style="background: var(--green-500); padding: 1rem 1.2rem; display: flex; align-items: center; gap: 0.8rem;">
+        <div style="background: #fff; color: var(--green-800); font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.1rem; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">2</div>
+        <div>
+          <h4 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; color: #fff; font-size: 1.15rem; margin: 0;">Verbreden naar IT/OT-integratie</h4>
+          <p style="font-size: 0.78rem; color: rgba(255,255,255,0.85); margin: 0.2rem 0 0;">Van installatie-denken naar systeemdenken</p>
+        </div>
+      </div>
+      <div style="padding: 1.2rem;">
+        <p style="font-size: 0.88rem; color: var(--gray-800); line-height: 1.7;"><strong>Voor wie:</strong> secundair engineers met IEC 61850 en SCADA-ervaring, of primair engineers die willen verbreden naar de besturings- en datalagen van installaties.</p>
+        <p style="font-size: 0.88rem; color: var(--gray-800); line-height: 1.7;"><strong>Wat je leert:</strong> AI-edge-analytics, predictive maintenance-specificatie, sensor-integratie, glasvezel-procesbus, cybersecurity-basisprincipes, IT/OT-convergentie.</p>
+        <h5 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--green-800); font-size: 0.85rem; margin-top: 1rem;">Stappen</h5>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.6rem;">
+          <div style="background: var(--gray-300); padding: 0.8rem; border-radius: 6px;">
+            <div style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--green-500); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px;">Maand 1-3</div>
+            <p style="font-size: 0.78rem; color: var(--gray-800); line-height: 1.45; margin: 0.3rem 0 0;">AI for Energy cursussen (Coursera/edX). IEC 61850 Ed. 2.1 updates. Hitachi Energy PCM600/IET600 verkennen.</p>
+          </div>
+          <div style="background: var(--gray-300); padding: 0.8rem; border-radius: 6px;">
+            <div style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--green-500); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px;">Maand 4-6</div>
+            <p style="font-size: 0.78rem; color: var(--gray-800); line-height: 1.45; margin: 0.3rem 0 0;">Pilotproject: sensorspecificatie voor predictive maintenance bij bestaande installatie. Samenwerking met netautomatisering.</p>
+          </div>
+          <div style="background: var(--gray-300); padding: 0.8rem; border-radius: 6px;">
+            <div style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--green-500); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px;">Maand 7-12</div>
+            <p style="font-size: 0.78rem; color: var(--gray-800); line-height: 1.45; margin: 0.3rem 0 0;">AI-analytics integreren in nieuwbouwproject. ABB Ability of vergelijkbaar platform. Design for monitorability-principes documenteren.</p>
+          </div>
+          <div style="background: var(--gray-300); padding: 0.8rem; border-radius: 6px;">
+            <div style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--green-500); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px;">Jaar 2</div>
+            <p style="font-size: 0.78rem; color: var(--gray-800); line-height: 1.45; margin: 0.3rem 0 0;">AI-edge-analytics op IED-niveau. Glasvezel-procesbus. Interne standaard voor sensor- en dataspecificatie.</p>
+          </div>
+        </div>
+        <div style="background: #f0f1ff; border-left: 3px solid var(--green-500); padding: 0.8rem 1rem; border-radius: 0 6px 6px 0; margin-top: 1rem;">
+          <p style="font-size: 0.82rem; color: var(--gray-800); line-height: 1.6; margin: 0;"><strong>Opgelet:</strong> AI-integratie vereist samenwerking met IT, data en operations. Dit is geen solo-route; de waarde zit juist in het verbinden van werelden.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Route 3 -->
+    <div style="border: 1px solid var(--gray-400); border-radius: 10px; margin-top: 1.5rem; overflow: hidden;">
+      <div style="background: #3a1518; padding: 1rem 1.2rem; display: flex; align-items: center; gap: 0.8rem;">
+        <div style="background: #fff; color: var(--green-800); font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.1rem; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">3</div>
+        <div>
+          <h4 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 800; color: #fff; font-size: 1.15rem; margin: 0;">Verstevigen als technisch leider</h4>
+          <p style="font-size: 0.78rem; color: rgba(255,255,255,0.85); margin: 0.2rem 0 0;">Van specialist naar integrator en coach</p>
+        </div>
+      </div>
+      <div style="padding: 1.2rem;">
+        <p style="font-size: 0.88rem; color: var(--gray-800); line-height: 1.7;"><strong>Voor wie:</strong> senior engineers met brede ervaring die al gevraagd worden als vraagbaak. Niet een carrièreswitch, maar een formalisering en verdieping van wat ze al doen.</p>
+        <p style="font-size: 0.88rem; color: var(--gray-800); line-height: 1.7;"><strong>Wat je leert:</strong> technisch leiderschap over multidisciplinaire projecten, coaching van junior/medior engineers, AI-geletterdheid (niet bouwen maar beoordelen), cross-disciplinaire normenkennis, compliance-bewustzijn.</p>
+        <h5 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--green-800); font-size: 0.85rem; margin-top: 1rem;">Stappen</h5>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.6rem;">
+          <div style="background: var(--gray-300); padding: 0.8rem; border-radius: 6px;">
+            <div style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--green-800); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px;">Maand 1-3</div>
+            <p style="font-size: 0.78rem; color: var(--gray-800); line-height: 1.45; margin: 0.3rem 0 0;">Verbreding buiten eigen discipline. Secundair engineers meelopen bij primair en vice versa. IT/OT-integratie en cybersecurity-basics.</p>
+          </div>
+          <div style="background: var(--gray-300); padding: 0.8rem; border-radius: 6px;">
+            <div style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--green-800); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px;">Maand 4-6</div>
+            <p style="font-size: 0.78rem; color: var(--gray-800); line-height: 1.45; margin: 0.3rem 0 0;">Coachingvaardigheden: interne of externe training in technisch leiderschap. Starten met begeleiding van een junior engineer.</p>
+          </div>
+          <div style="background: var(--gray-300); padding: 0.8rem; border-radius: 6px;">
+            <div style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--green-800); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px;">Maand 7-12</div>
+            <p style="font-size: 0.78rem; color: var(--gray-800); line-height: 1.45; margin: 0.3rem 0 0;">Eerste project als technisch lead. Focus op integrale review en kwaliteitsbewaking over disciplines heen.</p>
+          </div>
+          <div style="background: var(--gray-300); padding: 0.8rem; border-radius: 6px;">
+            <div style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--green-800); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px;">Jaar 2</div>
+            <p style="font-size: 0.78rem; color: var(--gray-800); line-height: 1.45; margin: 0.3rem 0 0;">AI-geletterdheid en digital twin-concepten verdiepen. Niet specialist worden, maar voldoende kennis om specialisten aan te sturen.</p>
+          </div>
+        </div>
+        <div style="background: #f5f0f0; border-left: 3px solid #3a1518; padding: 0.8rem 1rem; border-radius: 0 6px 6px 0; margin-top: 1rem;">
+          <p style="font-size: 0.82rem; color: var(--gray-800); line-height: 1.6; margin: 0;"><strong>Opgelet:</strong> de valkuil is dat dit een managementrol wordt. De waarde zit in technisch overzicht, niet in hiërarchie. Blijf inhoudelijk betrokken.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ZELFASSESSMENT ===== -->
+<section class="section-dark" style="background: #2d1215; padding: 2.5rem 1.5rem;">
+  <div class="container" style="max-width: 900px;">
+    <div class="assessment-widget" style="background: #fff;">
+      <h2 style="color: var(--green-800); margin-bottom: 0.3rem;">Zelfassessment: waar sta jij?</h2>
+      <p class="a-intro">Beantwoord de onderstaande stellingen om te ontdekken welke ontwikkelroute het beste aansluit bij jouw interesses en huidige vaardigheden. Het resultaat is een indicatie, geen diagnose.</p>
+      <p class="a-disclaimer">Dit assessment is gebaseerd op een vereenvoudigd model met gewogen stellingen. Het is bedoeld als gespreksstarter voor je ontwikkeling, niet als wetenschappelijk gevalideerd instrument. Bespreek je uitkomst met je leidinggevende of HR-adviseur.</p>
+
+      <div id="assessmentForm"></div>
+
+      <button id="assessmentSubmit" class="assessment-submit" disabled>Beantwoord alle 12 stellingen om je resultaat te zien</button>
+
+      <div id="assessmentResult" class="assessment-result">
+        <h4 style="color: var(--green-500);">Jouw top 2 ontwikkelroutes</h4>
+        <div id="resultPads"></div>
+        <p style="font-size: 0.82rem; margin-top: 1rem; opacity: 0.85;">Dit resultaat is indicatief. Bespreek je uitkomst met je leidinggevende en verken wat haalbaar is binnen je huidige rol.</p>
+        <button id="resetAssessment" style="background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.3); padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.82rem; margin-top: 0.5rem;">Opnieuw invullen</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== REALITEITSCHECK ===== -->
+<section class="section-light" style="padding: 2.5rem 1.5rem;">
+  <div class="container" style="max-width: 900px;">
+    <h2 style="color: var(--green-800);">Realiteitscheck: wat als je niets doet?</h2>
+    <p style="font-size: 0.92rem; color: var(--gray-800); line-height: 1.7;">De veranderingen in dit rapport zijn geen toekomstmuziek. De Europese Commissie publiceert in 2026 een Strategische Routekaart voor digitalisering en AI in de energiesector. <span class="ref">(EC, 2026)</span> De FRIA-verplichting gaat in augustus 2026 in. IEC 61850 Ed. 2.1-tooling is al gecertificeerd. Netbeheerders zoals Enexis werven nu al GenAI Engineers. <span class="ref">(Enexis, 2025)</span></p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
+      <div style="background: #fff; border-top: 3px solid var(--green-700); padding: 1.2rem; border-radius: 0 0 8px 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
+        <h5 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--green-800); margin-bottom: 0.4rem;">Korte termijn (0-12 maanden)</h5>
+        <p style="font-size: 0.82rem; color: var(--gray-800); line-height: 1.6;">Weinig merkbare impact. Het dagelijkse werk gaat door. Maar collega's die wel AI-tools verkennen, worden geleidelijk productiever bij specificatie-werk, offerte-analyse en rapportage.</p>
+      </div>
+      <div style="background: #fff; border-top: 3px solid var(--green-700); padding: 1.2rem; border-radius: 0 0 8px 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
+        <h5 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--green-800); margin-bottom: 0.4rem;">Middellange termijn (1-3 jaar)</h5>
+        <p style="font-size: 0.82rem; color: var(--gray-800); line-height: 1.6;">Digital twins worden standaard bij grote opdrachtgevers. Engineers die niet met digitale modellen kunnen werken, worden afhankelijk van collega's die dat wel kunnen. Compliance-eisen (FRIA, NIS2) creëren taken die iemand moet oppakken.</p>
+      </div>
+      <div style="background: #fff; border-top: 3px solid var(--green-700); padding: 1.2rem; border-radius: 0 0 8px 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
+        <h5 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--green-800); margin-bottom: 0.4rem;">Lange termijn (3-5 jaar)</h5>
+        <p style="font-size: 0.82rem; color: var(--gray-800); line-height: 1.6;">Het verschil tussen AI-geletterde en niet-AI-geletterde engineers wordt structureel zichtbaar in productiviteit en inzetbaarheid op complexe projecten. De arbeidsmarktkrapte beschermt niemand permanent.</p>
+      </div>
+    </div>
+
+    <p style="font-size: 0.92rem; color: var(--gray-800); line-height: 1.7; margin-top: 1.5rem;"><strong>De kern:</strong> domeinexpertise (hoogspanning, normen, veiligheid, veldkennis) wordt schaars en daarmee waardevoller. Maar die expertise komt alleen volledig tot zijn recht wanneer engineers ook de digitale tools beheersen die hun werk versnellen en verrijken. De vraag is niet óf je je ontwikkelt, maar hoe en wanneer.</p>
+  </div>
+</section>
+
+<!-- ===== BRONNEN VERDIEPING ===== -->
+<section class="section-light" style="padding: 1.5rem 1.5rem 2.5rem;">
+  <div class="container" style="max-width: 900px;">
+    <h2 style="color: var(--green-800);">Bronnen bij de verdieping</h2>
+
+    <div class="sources-list">
+      <h5 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--green-800); margin-bottom: 0.5rem;">Regelgeving en beleid</h5>
+      <ul style="font-size: 0.82rem; color: var(--gray-800); line-height: 1.8;">
+        <li>EU AI Act (2024) — art. 4, art. 26, Annex III</li>
+        <li>FRIA — Fundamental Rights Impact Assessment, verplicht vanaf augustus 2026</li>
+        <li>SER — Advies AI en Werk (mei 2025)</li>
+        <li>WOR — art. 25 (adviesrecht), art. 27 (instemmingsrecht)</li>
+        <li>AVG — DPIA-verplichting bij persoonsgegevensverwerking door AI</li>
+        <li>NIS2-richtlijn — cybersecurity-eisen essentiële diensten</li>
+      </ul>
+    </div>
+
+    <div class="sources-list" style="margin-top: 1rem;">
+      <h5 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--green-800); margin-bottom: 0.5rem;">Sector en technologie</h5>
+      <ul style="font-size: 0.82rem; color: var(--gray-800); line-height: 1.8;">
+        <li>Eurelectric — Strategic Roadmap digitalisation and AI in energy (2025)</li>
+        <li>IEA — AI-based fault detection estimates (2025)</li>
+        <li>GM Insights — Digital Substation Market Size 2026-2035</li>
+        <li>Siemens — Digital Twin Composer (CES 2026)</li>
+        <li>Hitachi Energy — IET600 IEC 61850 Ed. 2.1</li>
+        <li>Tandfonline — Leveraging AI for predictive maintenance (2025)</li>
+        <li>Energy Digital — NextEra Energy case (2025)</li>
+      </ul>
+    </div>
+
+    <div class="sources-list" style="margin-top: 1rem;">
+      <h5 style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--green-800); margin-bottom: 0.5rem;">Nederlandse context</h5>
+      <ul style="font-size: 0.82rem; color: var(--gray-800); line-height: 1.8;">
+        <li>AI Hub Oost — AI for Energy Grids Lab (Alliander + academia)</li>
+        <li>Enexis — GenAI Engineer vacature; Netautomatisering (2025)</li>
+        <li>MIT Sloan / SSRN — Generative AI productiviteitseffecten (2024-2025)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  // ===== TAB SWITCHING =====
+  var tabButtons = document.querySelectorAll('.tab-button');
+  var tabContents = document.querySelectorAll('.tab-content');
+  function activateTab(name) {
+    tabButtons.forEach(function(b) {
+      b.classList.toggle('active', b.getAttribute('data-tab') === name);
+    });
+    tabContents.forEach(function(c) {
+      c.classList.toggle('active', c.id === 'tab-' + name);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  tabButtons.forEach(function(b) {
+    b.addEventListener('click', function() {
+      activateTab(b.getAttribute('data-tab'));
+    });
+  });
+
+  // ===== ACCORDION PADEN =====
+  var padHeaders = document.querySelectorAll('.pad-header');
+  padHeaders.forEach(function(h) {
+    h.addEventListener('click', function() {
+      var item = h.parentElement;
+      item.classList.toggle('open');
+      var toggle = h.querySelector('.pad-toggle');
+      if (toggle) toggle.textContent = item.classList.contains('open') ? '\u2013' : '+';
+    });
+  });
+  var openAll = document.getElementById('openAllPads');
+  var closeAll = document.getElementById('closeAllPads');
+  if (openAll) openAll.addEventListener('click', function() {
+    document.querySelectorAll('.pad-item').forEach(function(i) {
+      i.classList.add('open');
+      var t = i.querySelector('.pad-toggle');
+      if (t) t.textContent = '\u2013';
+    });
+  });
+  if (closeAll) closeAll.addEventListener('click', function() {
+    document.querySelectorAll('.pad-item').forEach(function(i) {
+      i.classList.remove('open');
+      var t = i.querySelector('.pad-toggle');
+      if (t) t.textContent = '+';
+    });
+  });
+
+  // In-page anchors naar paden moeten accordion openen en tab wisselen
+  document.querySelectorAll('a.pad-link, a[href^="#pad"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      var href = a.getAttribute('href') || '';
+      if (!href.startsWith('#pad')) return;
+      var target = document.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+      activateTab('loopbaanpaden');
+      target.classList.add('open');
+      var t = target.querySelector('.pad-toggle');
+      if (t) t.textContent = '\u2013';
+      setTimeout(function() {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 120);
+    });
+  });
+
+  // ===== ZELFASSESSMENT =====
+  // Routes: 1=Digitale ontwerp-tools, 2=IT/OT-integratie, 3=Technisch leider
+  var padMeta = {
+    1: { name: 'Verdiepen in digitale ontwerp-tools', anchor: '#v-werkbeweging' },
+    2: { name: 'Verbreden naar IT/OT-integratie', anchor: '#v-werkbeweging' },
+    3: { name: 'Verstevigen als technisch leider', anchor: '#v-werkbeweging' }
+  };
+  var questions = [
+    { q: 'Ik word enthousiast van 3D-modellering, visualisatie en het virtueel testen van ontwerpen.', w: { 1: 3 } },
+    { q: 'Ik ben gefascineerd door hoe sensoren, besturingssystemen en AI samen een installatie slimmer kunnen maken.', w: { 2: 3, 1: 1 } },
+    { q: 'Ik word al gevraagd als vraagbaak door collega\'s uit andere disciplines en vind dat leuk.', w: { 3: 3 } },
+    { q: 'Ik ben gefrustreerd als ontwerpfouten pas tijdens montage zichtbaar worden en wil dat voorkomen.', w: { 1: 3, 2: 1 } },
+    { q: 'Ik heb ervaring met of interesse in IEC 61850, SCADA of substation-automatisering.', w: { 2: 3 } },
+    { q: 'Ik haal energie uit het coachen en begeleiden van minder ervaren collega\'s.', w: { 3: 3, 2: 1 } },
+    { q: 'Ik zoek graag naar patronen in data en ben geinteresseerd in Power BI of analysetools.', w: { 1: 2, 2: 2 } },
+    { q: 'Ik kan complexe technische keuzes uitleggen aan niet-technische stakeholders.', w: { 3: 3, 1: 1 } },
+    { q: 'Ik denk liever in systemen en samenhang dan in losse componenten of disciplines.', w: { 2: 2, 3: 2 } },
+    { q: 'Ik ben bereid om nieuwe software te leren en pionier te zijn, ook als het toollandschap nog niet volwassen is.', w: { 1: 3, 2: 1 } },
+    { q: 'Cybersecurity en compliance in het ontwerp vind ik net zo belangrijk als de technische specificaties.', w: { 2: 2, 3: 1 } },
+    { q: 'Ik heb meer dan tien jaar ervaring en overziet projecten van begin tot eind.', w: { 3: 3 } }
+  ];
+  var scaleLabels = ['Zeer oneens', 'Oneens', 'Neutraal', 'Eens', 'Zeer eens'];
+  var form = document.getElementById('assessmentForm');
+  var submitBtn = document.getElementById('assessmentSubmit');
+  var resultBox = document.getElementById('assessmentResult');
+  var resultPads = document.getElementById('resultPads');
+  var resetBtn = document.getElementById('resetAssessment');
+
+  function renderQuestions() {
+    if (!form) return;
+    form.innerHTML = '';
+    questions.forEach(function(q, idx) {
+      var qDiv = document.createElement('div');
+      qDiv.className = 'assessment-question';
+      var nEl = document.createElement('div');
+      nEl.className = 'qnum';
+      nEl.textContent = 'Stelling ' + (idx + 1) + ' / ' + questions.length;
+      var tEl = document.createElement('div');
+      tEl.className = 'qtext';
+      tEl.textContent = q.q;
+      var scale = document.createElement('div');
+      scale.className = 'assessment-scale';
+      for (var s = 1; s <= 5; s++) {
+        var lbl = document.createElement('label');
+        var inp = document.createElement('input');
+        inp.type = 'radio';
+        inp.name = 'q' + idx;
+        inp.value = String(s);
+        inp.addEventListener('change', onAnswerChange);
+        var span = document.createElement('span');
+        span.textContent = scaleLabels[s - 1];
+        lbl.appendChild(inp);
+        lbl.appendChild(span);
+        scale.appendChild(lbl);
+      }
+      qDiv.appendChild(nEl);
+      qDiv.appendChild(tEl);
+      qDiv.appendChild(scale);
+      form.appendChild(qDiv);
+    });
+  }
+
+  function onAnswerChange(e) {
+    // Visuele selectie
+    var name = e.target.name;
+    form.querySelectorAll('input[name="' + name + '"]').forEach(function(inp) {
+      inp.parentElement.classList.toggle('selected', inp.checked);
+    });
+    // Alle beantwoord?
+    var answered = 0;
+    questions.forEach(function(_, idx) {
+      if (form.querySelector('input[name="q' + idx + '"]:checked')) answered++;
+    });
+    if (answered === questions.length) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Toon mijn top 2 paden';
+    } else {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Nog ' + (questions.length - answered) + ' stelling(en) te gaan';
+    }
+  }
+
+  function calculate() {
+    var scores = { 1: 0, 2: 0, 3: 0 };
+    var maxScores = { 1: 0, 2: 0, 3: 0 };
+    questions.forEach(function(q, idx) {
+      var inp = form.querySelector('input[name="q' + idx + '"]:checked');
+      if (!inp) return;
+      var val = parseInt(inp.value, 10) - 3; // -2..+2
+      Object.keys(q.w).forEach(function(p) {
+        scores[p] += val * q.w[p];
+        maxScores[p] += 2 * q.w[p];
+      });
+    });
+    // Normaliseer naar percentage
+    var ranked = Object.keys(scores).map(function(p) {
+      var pct = maxScores[p] > 0 ? Math.round(((scores[p] + maxScores[p]) / (2 * maxScores[p])) * 100) : 0;
+      return { id: p, score: scores[p], pct: pct, name: padMeta[p].name, anchor: padMeta[p].anchor };
+    }).sort(function(a, b) { return b.score - a.score; });
+    return ranked;
+  }
+
+  function renderResult() {
+    var ranked = calculate();
+    resultPads.innerHTML = '';
+    var top = ranked.slice(0, 2);
+    top.forEach(function(p, i) {
+      var div = document.createElement('div');
+      div.className = 'result-pad';
+      var rank = document.createElement('div');
+      rank.className = 'rank';
+      rank.textContent = (i === 0 ? 'Beste match' : 'Tweede match');
+      var name = document.createElement('div');
+      name.className = 'name';
+      name.textContent = p.name;
+      var sc = document.createElement('div');
+      sc.className = 'score';
+      sc.textContent = 'Fit-score: ' + p.pct + '%';
+      var link = document.createElement('a');
+      link.href = p.anchor;
+      link.textContent = 'Bekijk dit pad \u2192';
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        var target = document.querySelector(p.anchor);
+        if (!target) return;
+        target.classList.add('open');
+        var t = target.querySelector('.pad-toggle');
+        if (t) t.textContent = '\u2013';
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      div.appendChild(rank);
+      div.appendChild(name);
+      div.appendChild(sc);
+      div.appendChild(link);
+      resultPads.appendChild(div);
+    });
+    resultBox.classList.add('show');
+    setTimeout(function() {
+      resultBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 80);
+  }
+
+  if (submitBtn) submitBtn.addEventListener('click', renderResult);
+  if (resetBtn) resetBtn.addEventListener('click', function() {
+    resultBox.classList.remove('show');
+    renderQuestions();
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Beantwoord alle 12 stellingen om je resultaat te zien';
+  });
+
+  renderQuestions();
+})();
+</script>
+
+<script>
+/* ===== VOORLEESFUNCTIE =====
+   Gebruikt SpeechSynthesis API (browser-native, geen backend).
+   - Leest beide tabs voor op verzoek.
+   - Slaat bronvermeldingen (.ref) en bronnen-blokken (.sources-list) over.
+   - Highlight de actieve zin via CSS Custom Highlight API (geen DOM-mutatie).
+   - Onthoudt voorkeuren (stem, snelheid, highlight) in localStorage. */
+(function() {
+  if (!('speechSynthesis' in window)) return;
+  var bar = document.getElementById('tts-bar');
+  if (!bar) return;
+
+  var STORAGE_KEY = 'hrxai.tts.v2';
+  var state = { voiceName: null, voiceExplicit: false, speed: 1, highlight: true };
+  try {
+    var saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    if (saved && typeof saved === 'object') Object.assign(state, saved);
+  } catch (e) {}
+  function save() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  var queue = [];
+  var queueIdx = 0;
+  var isPlaying = false;
+  var isPaused = false;
+  var units = [];
+  var skipping = false;
+
+  var hasHighlightAPI = (typeof CSS !== 'undefined' && CSS.highlights && typeof Highlight !== 'undefined');
+  var highlightObj = null;
+  if (hasHighlightAPI) {
+    try {
+      highlightObj = new Highlight();
+      CSS.highlights.set('tts-active', highlightObj);
+    } catch (e) { hasHighlightAPI = false; }
+  }
+
+  // ---- Voices ----
+  var voiceSelect = document.getElementById('tts-voice');
+  var voices = [];
+  function loadVoices() {
+    voices = window.speechSynthesis.getVoices() || [];
+    var nl = voices.filter(function(v) { return /^nl/i.test(v.lang); });
+    var pref = ['Fenna', 'Maarten', 'Colette', 'Xander', 'Google Nederlands'];
+    nl.sort(function(a, b) {
+      function rank(v) {
+        for (var i = 0; i < pref.length; i++) {
+          if (v.name.indexOf(pref[i]) >= 0) return i;
+        }
+        return 99;
+      }
+      return rank(a) - rank(b);
+    });
+    var other = voices.filter(function(v) { return !/^nl/i.test(v.lang); });
+    var ordered = nl.concat(other);
+    if (!voiceSelect) return;
+    voiceSelect.innerHTML = '';
+    if (ordered.length === 0) {
+      var opt = document.createElement('option');
+      opt.textContent = 'Geen stemmen beschikbaar';
+      voiceSelect.appendChild(opt);
+      return;
+    }
+    // Group Dutch first
+    if (nl.length > 0) {
+      var gNl = document.createElement('optgroup');
+      gNl.label = 'Nederlands';
+      nl.forEach(function(v) {
+        var o = document.createElement('option');
+        o.value = v.name;
+        o.textContent = v.name.replace(/Microsoft |Online \(Natural\) - /g, '') + ' (' + v.lang + ')';
+        gNl.appendChild(o);
+      });
+      voiceSelect.appendChild(gNl);
+    }
+    if (other.length > 0) {
+      var gOther = document.createElement('optgroup');
+      gOther.label = 'Overig';
+      other.slice(0, 30).forEach(function(v) {
+        var o = document.createElement('option');
+        o.value = v.name;
+        o.textContent = v.name + ' (' + v.lang + ')';
+        gOther.appendChild(o);
+      });
+      voiceSelect.appendChild(gOther);
+    }
+    // Fenna is de default. Alleen als de gebruiker zelf een andere stem koos
+    // (voiceExplicit === true) respecteren we die.
+    var fenna = ordered.find(function(v) { return v.name.indexOf('Fenna') >= 0; });
+    var found = state.voiceName ? ordered.find(function(v) { return v.name === state.voiceName; }) : null;
+    if (state.voiceExplicit && found) {
+      voiceSelect.value = found.name;
+    } else if (fenna) {
+      voiceSelect.value = fenna.name;
+      state.voiceName = fenna.name;
+      save();
+    } else if (nl.length > 0) {
+      voiceSelect.value = nl[0].name;
+      state.voiceName = nl[0].name;
+      save();
+    }
+  }
+  loadVoices();
+  if (typeof window.speechSynthesis.onvoiceschanged !== 'undefined') {
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+  }
+
+  // ---- Build reading units from active tab ----
+  function getActiveTabEl() { return document.querySelector('.tab-content.active'); }
+
+  function isExcluded(node) {
+    var p = node;
+    while (p && p.nodeType === 1) {
+      if (p.classList) {
+        if (p.classList.contains('ref') || p.classList.contains('sources-list') ||
+            p.id === 'tts-bar' || p.id === 'tts-popover') return true;
+      }
+      p = p.parentNode;
+    }
+    return false;
+  }
+
+  function extractUnitText(el) {
+    var clone = el.cloneNode(true);
+    clone.querySelectorAll('.ref, .sources-list, .pad-toggle, .pad-numlabel').forEach(function(n) { n.remove(); });
+    return clone.textContent.replace(/\s+/g, ' ').trim();
+  }
+
+  function collectUnits(root) {
+    var selector = 'h1, h2, h3, h4, h5, h6, p, li, .case-block, .tprofiel-card .desc, .assessment-question .qtext';
+    var all = root.querySelectorAll(selector);
+    var result = [];
+    var seenText = new Set();
+    all.forEach(function(el) {
+      if (el.closest('.sources-list')) return;
+      if (el.closest('#tts-bar') || el.closest('#tts-popover')) return;
+      // Avoid reading li's parent p twice etc: skip nested non-leaf block reads.
+      // A <p> with inner <li>? uncommon here. Skip if element contains another selected unit except inline.
+      // For li inside ul inside .case-block, we still want to read them.
+      var text = extractUnitText(el);
+      if (!text || text.length < 2) return;
+      result.push({ el: el, text: text });
+    });
+    return result;
+  }
+
+  function splitSentences(text) {
+    var parts = text.match(/[^.!?]+[.!?]+["')\]]?\s*|\S[^.!?]*$/g);
+    if (!parts) return [text];
+    return parts.map(function(s) { return s.trim(); }).filter(function(s) { return s.length > 0; });
+  }
+
+  function getTextNodesIn(root) {
+    var nodes = [];
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode: function(n) {
+        if (!n.nodeValue) return NodeFilter.FILTER_REJECT;
+        if (isExcluded(n.parentNode)) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    var n;
+    while ((n = walker.nextNode())) nodes.push(n);
+    return nodes;
+  }
+
+  function buildRangeForSentence(el, sentenceText) {
+    var nodes = getTextNodesIn(el);
+    if (nodes.length === 0) return null;
+    var raw = '';
+    var map = [];
+    nodes.forEach(function(n) {
+      map.push({ node: n, start: raw.length, end: raw.length + n.nodeValue.length });
+      raw += n.nodeValue;
+    });
+    var normRaw = '';
+    var idxMap = [];
+    for (var i = 0; i < raw.length; i++) {
+      var ch = raw[i];
+      if (/\s/.test(ch)) {
+        if (normRaw.length > 0 && normRaw[normRaw.length - 1] !== ' ') {
+          normRaw += ' ';
+          idxMap.push(i);
+        }
+      } else {
+        normRaw += ch;
+        idxMap.push(i);
+      }
+    }
+    var needle = sentenceText.replace(/\s+/g, ' ').trim();
+    var pos = normRaw.indexOf(needle);
+    if (pos < 0) {
+      var shortNeedle = needle.substring(0, Math.min(24, needle.length));
+      pos = normRaw.indexOf(shortNeedle);
+      if (pos < 0) return null;
+    }
+    var startRaw = idxMap[pos];
+    var endNormIdx = Math.min(pos + needle.length - 1, idxMap.length - 1);
+    var endRaw = idxMap[endNormIdx] + 1;
+    var startNode = null, startOffset = 0, endNode = null, endOffset = 0;
+    for (var j = 0; j < map.length; j++) {
+      if (startRaw >= map[j].start && startRaw < map[j].end) {
+        startNode = map[j].node;
+        startOffset = startRaw - map[j].start;
+      }
+      if (endRaw > map[j].start && endRaw <= map[j].end) {
+        endNode = map[j].node;
+        endOffset = endRaw - map[j].start;
+      }
+    }
+    if (!startNode || !endNode) return null;
+    try {
+      var r = document.createRange();
+      r.setStart(startNode, startOffset);
+      r.setEnd(endNode, endOffset);
+      return r;
+    } catch (e) { return null; }
+  }
+
+  function buildQueue(startUnitIdx) {
+    queue = [];
+    // Combineer zinnen uit hetzelfde blok tot chunks van max ~220 tekens.
+    // Zo zitten de onvermijdelijke microknipjes tussen utterances
+    // bij natuurlijke grenzen (na een paar zinnen of aan het eind van een paragraaf),
+    // niet na elke losse zin. Onder Chrome's ~15s-limiet met marge.
+    var MAX_CHUNK = 220;
+    for (var i = startUnitIdx; i < units.length; i++) {
+      var u = units[i];
+      var sents = splitSentences(u.text);
+      var chunk = '';
+      for (var s = 0; s < sents.length; s++) {
+        var sent = sents[s];
+        if (chunk.length === 0) {
+          chunk = sent;
+        } else if (chunk.length + 1 + sent.length <= MAX_CHUNK) {
+          chunk += ' ' + sent;
+        } else {
+          queue.push({ text: chunk, el: u.el, unitIdx: i });
+          chunk = sent;
+        }
+      }
+      if (chunk.length > 0) {
+        queue.push({ text: chunk, el: u.el, unitIdx: i });
+      }
+    }
+    queueIdx = 0;
+  }
+
+  var sectionSelect = document.getElementById('tts-section');
+  function populateSections() {
+    if (!sectionSelect) return;
+    sectionSelect.innerHTML = '';
+    var first = document.createElement('option');
+    first.value = '0';
+    first.textContent = 'Vanaf begin';
+    sectionSelect.appendChild(first);
+    units.forEach(function(u, i) {
+      var tag = u.el.tagName;
+      if (tag === 'H1' || tag === 'H2') {
+        var opt = document.createElement('option');
+        opt.value = String(i);
+        var t = u.text;
+        if (t.length > 60) t = t.substring(0, 60) + '\u2026';
+        opt.textContent = (tag === 'H1' ? '' : '') + t;
+        sectionSelect.appendChild(opt);
+      }
+    });
+  }
+
+  function rebuildForActiveTab() {
+    stop();
+    var root = getActiveTabEl();
+    if (!root) { units = []; populateSections(); return; }
+    units = collectUnits(root);
+    populateSections();
+  }
+
+  // ---- Playback ----
+  var statusEl = document.getElementById('tts-status');
+  function setStatus(txt) { if (statusEl) statusEl.textContent = txt; }
+
+  function applyHighlight(item) {
+    if (!state.highlight) { clearHighlight(); return; }
+    if (!hasHighlightAPI) return;
+    try {
+      var r = buildRangeForSentence(item.el, item.text);
+      highlightObj.clear();
+      if (r) {
+        highlightObj.add(r);
+        var rect = r.getBoundingClientRect();
+        var vh = window.innerHeight || document.documentElement.clientHeight;
+        if (rect.top < 80 || rect.bottom > vh - 120) {
+          item.el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    } catch (e) {}
+  }
+  function clearHighlight() {
+    if (hasHighlightAPI && highlightObj) {
+      try { highlightObj.clear(); } catch (e) {}
+    }
+  }
+
+  function speakNext() {
+    if (!isPlaying) return;
+    if (queueIdx >= queue.length) { stop(); return; }
+    var item = queue[queueIdx];
+    var u = new SpeechSynthesisUtterance(item.text);
+    u.rate = state.speed;
+    u.lang = 'nl-NL';
+    var v = voices.find(function(x) { return x.name === state.voiceName; });
+    if (v) u.voice = v;
+    u.onstart = function() {
+      applyHighlight(item);
+      setStatus('Bezig ' + (queueIdx + 1) + '/' + queue.length);
+    };
+    u.onend = function() {
+      if (skipping) return;
+      if (!isPlaying) return;
+      queueIdx++;
+      setTimeout(speakNext, 0);
+    };
+    u.onerror = function() {
+      if (skipping) return;
+      if (!isPlaying) return;
+      queueIdx++;
+      setTimeout(speakNext, 0);
+    };
+    try { window.speechSynthesis.speak(u); } catch (e) {}
+  }
+
+  function play() {
+    if (isPaused) {
+      try { window.speechSynthesis.resume(); } catch (e) {}
+      isPaused = false;
+      setStatus('Bezig');
+      updatePlayButton();
+      return;
+    }
+    if (isPlaying) return;
+    if (units.length === 0) rebuildForActiveTab();
+    if (queue.length === 0) {
+      var startIdx = sectionSelect ? parseInt(sectionSelect.value || '0', 10) : 0;
+      if (isNaN(startIdx)) startIdx = 0;
+      buildQueue(startIdx);
+    }
+    if (queue.length === 0) { setStatus('Niets om voor te lezen'); return; }
+    isPlaying = true;
+    isPaused = false;
+    updatePlayButton();
+    speakNext();
+  }
+  function pause() {
+    if (!isPlaying || isPaused) return;
+    try { window.speechSynthesis.pause(); } catch (e) {}
+    isPaused = true;
+    setStatus('Gepauzeerd');
+    updatePlayButton();
+  }
+  function stop() {
+    isPlaying = false;
+    isPaused = false;
+    queue = [];
+    queueIdx = 0;
+    try { window.speechSynthesis.cancel(); } catch (e) {}
+    clearHighlight();
+    setStatus('Klaar');
+    updatePlayButton();
+  }
+
+  var playBtn = document.getElementById('tts-playpause');
+  function updatePlayButton() {
+    if (!playBtn) return;
+    playBtn.textContent = (isPlaying && !isPaused) ? '\u275A\u275A' : '\u25B6';
+  }
+
+  if (playBtn) playBtn.addEventListener('click', function() {
+    if (isPlaying && !isPaused) pause(); else play();
+  });
+  var stopBtn = document.getElementById('tts-stop');
+  if (stopBtn) stopBtn.addEventListener('click', stop);
+
+  // Vooruit/terug spoelen per zin-chunk.
+  function skipTo(newIdx) {
+    if (queue.length === 0) {
+      // Queue nog niet gebouwd: bouw em nu zodat preview werkt.
+      if (units.length === 0) rebuildForActiveTab();
+      var startIdx = sectionSelect ? parseInt(sectionSelect.value || '0', 10) : 0;
+      if (isNaN(startIdx)) startIdx = 0;
+      buildQueue(startIdx);
+      if (queue.length === 0) return;
+    }
+    newIdx = Math.max(0, Math.min(queue.length - 1, newIdx));
+    queueIdx = newIdx;
+    var item = queue[queueIdx];
+    setStatus('Bezig ' + (queueIdx + 1) + '/' + queue.length);
+    if (isPlaying) {
+      // Huidige utterance afbreken en direct de nieuwe starten,
+      // zonder dat onend per ongeluk nog een stap vooruit doet.
+      skipping = true;
+      try { window.speechSynthesis.cancel(); } catch (e) {}
+      setTimeout(function() {
+        skipping = false;
+        if (isPlaying) {
+          if (isPaused) { isPaused = false; updatePlayButton(); }
+          speakNext();
+        }
+      }, 40);
+    } else {
+      // Niet aan het spelen: preview de highlight en scroll erheen.
+      applyHighlight(item);
+    }
+  }
+  function skipPrev() { skipTo(queueIdx - 1); }
+  function skipNext() { skipTo(queueIdx + 1); }
+
+  var prevBtn = document.getElementById('tts-prev');
+  var nextBtn = document.getElementById('tts-next');
+  if (prevBtn) prevBtn.addEventListener('click', skipPrev);
+  if (nextBtn) nextBtn.addEventListener('click', skipNext);
+
+  // Toetsenbord shortcuts wanneer de bar focus heeft
+  bar.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'SELECT') return;
+    if (e.key === 'ArrowLeft') { skipPrev(); e.preventDefault(); }
+    else if (e.key === 'ArrowRight') { skipNext(); e.preventDefault(); }
+    else if (e.key === ' ') {
+      if (isPlaying && !isPaused) pause(); else play();
+      e.preventDefault();
+    }
+  });
+
+  // Speed buttons
+  var speedBtns = document.querySelectorAll('#tts-bar [data-speed]');
+  speedBtns.forEach(function(b) {
+    if (parseFloat(b.getAttribute('data-speed')) === state.speed) b.classList.add('active');
+    else b.classList.remove('active');
+    b.addEventListener('click', function() {
+      state.speed = parseFloat(b.getAttribute('data-speed'));
+      save();
+      speedBtns.forEach(function(x) { x.classList.toggle('active', x === b); });
+      // Nieuwe snelheid wordt toegepast op de volgende zin, geen onderbreking.
+    });
+  });
+
+  if (sectionSelect) sectionSelect.addEventListener('change', function() {
+    var startIdx = parseInt(sectionSelect.value || '0', 10);
+    if (isNaN(startIdx)) startIdx = 0;
+    var wasPlaying = isPlaying;
+    stop();
+    buildQueue(startIdx);
+    if (units[startIdx]) {
+      units[startIdx].el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    if (wasPlaying) setTimeout(play, 120);
+  });
+
+  // Expand/collapse bar
+  var toggleBtn = document.getElementById('tts-toggle');
+  var closeBtn = document.getElementById('tts-close');
+  if (toggleBtn) toggleBtn.addEventListener('click', function() {
+    bar.classList.remove('collapsed');
+  });
+  if (closeBtn) closeBtn.addEventListener('click', function() {
+    stop();
+    var pop = document.getElementById('tts-popover');
+    if (pop) pop.hidden = true;
+    bar.classList.add('collapsed');
+  });
+
+  // Settings popover
+  var settingsBtn = document.getElementById('tts-settings-btn');
+  var popover = document.getElementById('tts-popover');
+  var popoverClose = document.getElementById('tts-popover-close');
+  if (settingsBtn) settingsBtn.addEventListener('click', function() {
+    if (popover) popover.hidden = !popover.hidden;
+  });
+  if (popoverClose) popoverClose.addEventListener('click', function() {
+    if (popover) popover.hidden = true;
+  });
+  if (voiceSelect) voiceSelect.addEventListener('change', function() {
+    state.voiceName = voiceSelect.value;
+    state.voiceExplicit = true;
+    save();
+  });
+  var hlToggle = document.getElementById('tts-highlight-on');
+  if (hlToggle) {
+    hlToggle.checked = !!state.highlight;
+    hlToggle.addEventListener('change', function() {
+      state.highlight = hlToggle.checked;
+      save();
+      if (!state.highlight) clearHighlight();
+    });
+  }
+
+  // Stop & rebuild bij tabwissel
+  document.querySelectorAll('.tab-button').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      stop();
+      setTimeout(rebuildForActiveTab, 60);
+    });
+  });
+
+  // Stop bij unload
+  window.addEventListener('beforeunload', function() {
+    try { window.speechSynthesis.cancel(); } catch (e) {}
+  });
+
+  // Eerste build
+  rebuildForActiveTab();
+})();
+</script>
+
+</body>
+</html>
